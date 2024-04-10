@@ -181,6 +181,29 @@ app.delete('/api/joblist/:id', async (req, res) => {
     }
 })
 
+// Error handling middleware for Multer errors
+app.use(function(err, req, res, next) {
+    if (err instanceof multer.MulterError) {
+        console.error('Multer error:', err);
+        res.status(400).json({ error: 'File upload error' });
+    } else {
+        next(err);
+    }
+});
+
+
+app.post('/upload', function(req, res) {
+    upload(req, res, function(err) {
+        if (err) {
+            console.error('File upload error:', err);
+            return res.status(500).send('File upload failed!');
+        }
+        console.log('File uploaded successfully:', req.file);
+        res.status(200).send('File uploaded!');
+    });
+});
+
+
 const PORT = process.env.PORT || 3000; // Use environment variable for port or default to 3000
 
 app.listen(PORT, () => {
