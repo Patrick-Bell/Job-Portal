@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    scroll-behavior: smooth;
+}
+:root{
+    --primary-color: rgb(216, 145, 12);
+}
+.hide-input{
+    background: white;
+    outline: none;
+    border: none;
+}
+textarea {
+    width: 100%;
+    resize: none;
+}
+
+/* navbar */
+.navbar{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    background: white !important;
+}
+img{
+    width: 100px;
+    height: 100px;
+    margin: 0 30px;
+}
+.menu{
+    margin: 0 30px;
+    background: var(--primary-color);
+    font-size: 2rem;
+    padding: 10px;
+    color: white;
+    border-radius: 0.4rem;
+}
+
+.title-container{
+    height: 80vh;
+    background: var(--primary-color);
+    position: relative;
+    margin: 10px;
+    border-radius: 0.4rem;
+}
+.lg-job-title{
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: white;
+}
+.summary-container{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    color: white;
+    margin: 10px !important;
+}
+.see-details{
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    color: white;
+    text-decoration: none;
+    font-size: 2.5rem;
+}
+.flex-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.summary-gap{
+    margin: 0 10px;
+}
+
+/* job desc */
+.job-desc-container{
+    width: 80%;
+    text-align: left;
+    margin: auto auto;
+    background: white;
+    border-radius: 0.4rem;
+
+}
+.lg-container{
+    background: rgb(236, 234, 234);
+    padding: 10px;
+    margin: 10px;
+    border-radius: 0.4rem;
+}
+label{
+    font-weight: 700;
+}
+.salary-container{
+    background: var(--primary-color);
+    margin: 10px;
+    padding: 10px;
+    border-radius: 0.4rem;
+}
+.input-container{
+    margin: 10px;
+    padding: 10px;
+}
+.date-container{
+    padding: 10px;
+    margin-top: -10px;
+}
+#click-to-apply-button{
+    display: grid;
+    place-items: center;
+    padding: 10px;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 0.4rem;
+}
+
+
+/* job application */
+h1{
+    text-align: center;
+    margin-top: 25px;
+}
+
+#jobApplicationForm input, textarea{
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+}
+.cv-container{
+    display: flex;
+}
+.resume{
+    background: white;
+}
+#application-submit-btn{
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 0.4rem;
+}
+#application-submit-btn:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
+.job-app-form{
+    display: none;
+}
+.full-container {
+    position: relative;
+}
+
+.full-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 100%;
+    background: url('/images/background.jpg');
+    filter: blur(1px); /* Adjust the blur radius as needed */
+    z-index: -1;
+}
+
+
+/* animations */
+.hidden-left{
+    opacity: 0;
+    filter: blur(75%);
+    transition: all 3s;
+    transform: translateX(-100%);
+}
+.hidden-right{
+    opacity: 0;
+    filter: blur(75%);
+    transition: all 3s;
+    transform: translateX(100%)
+}
+.hidden-up{
+    opacity: 0;
+    filter: blur(75%);
+    transition: all 3s;
+    transform: translateY(-100%);
+}
+.show{
+    opacity: 1;
+    filter: blur(0);
+    transform: translateX(0);
+}
+
+
+
+/* FOOTER */
+.footer{
+    height: 30vh;
+    background: var(--primary-color);
+    color: white;
+    margin: 10px;
+    display: flex;
+    align-items: center;
+
+}

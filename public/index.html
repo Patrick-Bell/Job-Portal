@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Admin Page</title>
+</head>
+<body>
+
+    <button id="addJobBtn">Add Job</button>
+
+    <table id="jobTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Job</th>
+                <th>Type</th>
+                <th>Date</th>
+                <th>Applicants</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+
+
+
+
+
+
+    <dialog id="jobModal">
+        <div class="input-container">
+            <label for="job-id">Job ID:</label>
+            <input type="text" id="job-id" name="job-id" disabled>
+        </div>
+
+        <div class="input-container">
+            <label for="job-date">Date Posted</label>
+            <input type="text" id="job-date" name="job-date" disabled>
+        </div>
+
+        <div class="input-container">
+            <label for="job-deadline">Job Deadline</label>
+            <input type="date" id="job-deadline" name="job-deadline">
+        </div>
+      
+        <div class="input-container">
+            <label for="job-title">Job Title:</label>
+            <input type="text" id="job-title" name="job-title">
+        </div>
+      
+        <div class="input-container">
+            <label>Job Type:</label>
+            <div class="line-container">
+                <input type="radio" id="permanent" name="jobType" value="Permanent" checked>
+                <label for="permanent">Permanent</label>
+            </div>
+            <div class="line-container">
+                <input type="radio" id="contract" name="jobType" value="Contract">
+                <label for="contract">Contract</label>
+            </div>
+        </div>
+
+        <div class="input-container perm-container">
+            <label for="salary">Salary:</label>
+            <input type="text" id="salary" name="salary" value="0">
+
+            <label for="salary">Max Salary:</label>
+            <input type="text" id="max-salary" name="max-salary" value="0">
+
+        </div>
+
+        <div class="input-container ir35-container">
+            <label for="day-rate">Day Rate:</label>
+            <input type="text" id="day-rate" name="day-rate">
+
+            <label for="day-rate">Higher Day Rate</label>
+            <input type="text" id="higher-day-rate" name="higher-day-rate">
+        
+
+        <div class="input-container">
+            <label>IR35 Status:</label>
+            <div class="line-container">
+                <input type="radio" id="insideIR35" name="ir35Status" value="Inside IR35">
+                <label for="insideIR35">Inside IR35</label>
+            </div>
+            <div class="line-container">
+                <input type="radio" id="outsideIR35" name="ir35Status" value="Outside IR35">
+                <label for="outsideIR35">Outside IR35</label>
+            </div>
+            <div class="line-container">
+                <input type="radio" id="n/a" name="ir35Status" value="N/A" checked>
+                <label for="n/a">N/A</label>
+            </div>
+        </div>
+    </div>
+      
+        <div class="input-container">
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location">
+        </div>
+      
+        <div class="input-container">
+            <label for="work-schedule">Work Schedule:</label>
+            <select id="work-schedule" name="work-schedule">
+              <option value="Hybrid">Hybrid</option>
+              <option value="Remote">Remote</option>
+            </select>
+        </div>
+      
+        <div class="input-container">
+            <label for="job-description">Job Description:</label>
+            <textarea id="job-description" name="job-description" rows="10"></textarea>
+        </div>
+      
+        <div class="input-container">
+            <label for="skills">Skills:</label>
+            <textarea id="skills" name="skills" rows="10"></textarea>
+        </div>
+      
+        <div class="input-container">
+            <label for="benefits">Benefits:</label>
+            <textarea id="benefits" name="benefits" rows="10"></textarea>
+        </div>
+
+        <div class="input-container">
+            <label for="status">Job Status:</label>
+            <select id="status" name="status">
+              <option value="open" id="open" name="open">Open</option>
+              <option value="closed" id="closed" name="closed">Closed</option>
+            </select>
+        </div>
+
+
+      
+        <div class="button-container">
+        <input type="submit" value="Submit" id="submit-job-btn">
+        <input type="button" value="close" id="close-btn">
+    </div>
+    </dialog>
+
+
+    <dialog id="editModal">
+        <div class="input-container">
+            <label for="edit-job-id">Job ID:</label>
+            <input type="text" id="edit-job-id" name="edit-job-id" disabled>
+        </div>
+
+        <div class="input-container">
+            <label for="job-date">Date Posted</label>
+            <input type="text" id="edit-job-date" name="edit-job-date" disabled>
+        </div>
+
+        <div class="input-container">
+            <label for="edit-job-deadline">Job Deadline</label>
+            <input type="date" id="edit-job-deadline" name="edit-job-deadline" required>
+            <div class="edit-deadline-error">*** Deadline date may NOT show whilst editing. Please ensure a date is inputted before confirming your changes. ***</div>
+        </div>
+      
+        <div class="input-container">
+            <label for="edit-job-title">Job Title:</label>
+            <input type="text" id="edit-job-title" name="edit-job-title">
+            <div class="edit-job-title-error">Maximum characters is 100</div>
+        </div>
+      
+        <div class="input-container">
+            <label>Job Type:</label>
+            <div class="line-container">
+                <input type="radio" id="edit-permanent" name="edit-jobType" value="Permanent" checked>
+                <label for="permanent">Permanent</label>
+            </div>
+            <div class="line-container">
+                <input type="radio" id="edit-contract" name="edit-jobType" value="Contract">
+                <label for="contract">Contract</label>
+            </div>
+        </div>
+
+        <div class="input-container edit-perm-container">
+            <label for="edit-salary">Salary:</label>
+            <input type="text" id="edit-salary" name="edit-salary" value="0">
+            <div class="edit-job-salary-error">Salary</div>
+
+
+
+            <label for="edit-max-salary">Max Salary:</label>
+            <input type="text" id="edit-max-salary" name="edit-max-salary" value="0">
+            <div class="edit-job-max-salary-error">Higher salary bracket must be higher than the lower salary bracket</div>
+
+
+
+        </div>
+
+        <div class="input-container edit-ir35-container">
+            <label for="edit-day-rate">Day Rate:</label>
+            <input type="text" id="edit-day-rate" name="edit-day-rate">
+            <div class="edit-job-rate-error">Salary</div>
+
+
+
+            <label for="edit-day-rate">Higher Day Rate</label>
+            <input type="text" id="edit-higher-day-rate" name="edit-higher-day-rate">
+            <div class="edit-job-higher-rate-error">Salary</div>
+
+
+        
+
+        <div class="input-container">
+            <label>IR35 Status:</label>
+            <div class="line-container">
+                <input type="radio" id="edit-insideIR35" name="edit-ir35Status" value="Inside IR35">
+                <label for="edit-insideIR35">Inside IR35</label>
+            </div>
+            <div class="line-container">
+                <input type="radio" id="edit-outsideIR35" name="edit-ir35Status" value="Outside IR35">
+                <label for="edit-outsideIR35">Outside IR35</label>
+            </div>
+            <div class="line-container">
+                <input type="radio" id="edit-n/a" name="edit-ir35Status" value="N/A" checked>
+                <label for="edit-n/a">N/A</label>
+            </div>
+        </div>
+    </div>
+      
+        <div class="input-container">
+            <label for="edit-location">Location:</label>
+            <input type="text" id="edit-location" name="edit-location">
+            <div class="edit-job-location-error">Salary</div>
+
+        </div>
+      
+        <div class="input-container">
+            <label for="edit-work-schedule">Work Schedule:</label>
+            <select id="edit-work-schedule" name="edit-work-schedule">
+              <option value="Hybrid">Hybrid</option>
+              <option value="Remote">Remote</option>
+            </select>
+        </div>
+      
+        <div class="input-container">
+            <label for="edit-job-description">Job Description:</label>
+            <textarea id="edit-job-description" name="edit-job-description" rows="10"></textarea>
+            <div class="edit-job-desc-error">Salary</div>
+        </div>
+      
+        <div class="input-container">
+            <label for="edit-skills">Skills:</label>
+            <textarea id="edit-skills" name="edit-skills" rows="10"></textarea>
+            <div class="edit-job-skills-error">Salary</div>
+            
+        </div>
+      
+        <div class="input-container">
+            <label for="edit-benefits">Benefits:</label>
+            <textarea id="edit-benefits" name="edit-benefits" rows="10"></textarea>
+            <div class="edit-job-benefits-error">Salary</div>
+
+        </div>
+
+        <div class="input-container">
+            <label for="edit-status">Job Status:</label>
+            <select id="edit-status" name="edit-status">
+              <option value="open" id="edit-open" name="edit-open">Open</option>
+              <option value="closed" id="edit-closed" name="edit-closed">Closed</option>
+            </select>
+        </div>
+
+
+      
+        <div class="button-container">
+        <input type="submit" value="Submit" id="edit-submit-job-btn">
+        <input type="button" value="close" id="edit-close-btn">
+    </div>
+    </dialog>
+      
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="admin.js"></script>
+</body>
+</html>

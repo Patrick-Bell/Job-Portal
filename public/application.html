@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/application.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>Job Application Form</title>
+</head>
+<body>
+
+    <div class="full-container">
+    <div class="navbar">
+        <img src="/images/testlogo.jpeg" alt="">
+        <i class="fa-solid fa-bars menu hidden-left"></i>
+    </div>
+
+    <div class="title-container">
+        <div class="summary-container">
+        <label for="job-title"></label>
+        <div id="job-title" name="job-title" class="lg-job-title hidden-up"></div>
+            <div class="flex-container">
+            <label for="job-type"></label>
+            <div id="job-type" name="job-type" class="summary-gap hidden-left"></div>
+            <div class="gap">|</div>
+            <div class="text summary-gap hidden-up">Technology</div>
+            <div class="gap">|</div>
+            <label for="job-location"></label>
+            <div id="job-location" name="job-location" class="summary-gap hidden-right"></div>
+
+        </div>
+        </div>
+        <a href="#job-desc" class="see-details"><i class="fa-solid fa-arrow-down fa-beat"></i></a>
+
+        </div>
+
+
+<div class="job-desc-container" id="job-desc">
+    <h1>Job Details</h1>
+
+    <div class="date-container hidden-up">
+            <label for="job-date"></label>
+            <div id="job-date" name="job-date" class="hide-input"></div>
+            <label for="job-deadline"></label>
+            <div id="job-deadline" name="job-deadline"></div>
+    </div>
+
+    <div class="lg-container">
+
+        <div class="salary-container hidden-up">
+
+        <div class="input-container">
+            <label for="salary">Salary</label>
+            <div id="salary" name="salary"></div>
+        </div>
+
+        <div class="input-container">
+            <label for="job-dayrate">Day Rate</label>
+            <div id="job-dayrate" name="job-dayrate"></div>
+        </div>
+
+    </div>
+
+        <div class="input-container hidden-up">
+            <label for="job-description">Job Description</label>
+            <div id="job-description"></div>
+        </div>
+
+        <div class="input-container hidden-up">
+            <label for="skills">Skills</label>
+            <div id="skills"></div>
+        </div>
+
+        <div class="input-container hidden-up">
+            <label for="benefits">Benefits</label>
+            <div id="benefits" name="benefits"></div>
+        </div>
+
+        <div id="click-to-apply-button" class="hidden-left">Apply here!</div>
+
+
+        
+    </div>
+    </div>
+    
+
+    
+    
+
+<div class="job-app-form">
+    <div class="job-desc-container">
+        <h1>Job Application</h1>
+    <div class="lg-container">
+        <form id="jobApplicationForm" enctype="multipart/form-data">
+
+        <input id="jobId" name="jobId" disabled>
+
+        <input type="text" id="date-applied" name="date-applied" placeholder="Date Applied" disabled><br>
+
+        <!-- Other applicant details -->
+        <input type="text" id="fullName" name="fullName" required placeholder="Full Name *" class="hidden-up"><br>
+
+        <input type="email" id="email" name="email" required placeholder="Email *" class="hidden-up"><br>
+
+        <input type="tel" id="phone" name="phone" required placeholder="Number *" class="hidden-up"><br>
+
+        <input type="text" id="linkedin" name="linkedin" required placeholder="LinkedIn Profile *" class="hidden-up"><br>
+
+        
+        <div class="cv-container">
+        <input for="resume" disabled placeholder="CV *" class="hidden-up">
+        <input type="file" id="resume" name="resume" accept=".pdf" required class="resume"><br>
+        </div>
+
+        <label for="coverLetter">Cover Letter:</label><br>
+        <textarea id="coverLetter" name="coverLetter" rows="10" cols="50" placeholder="Cover Letter (optional)" class="hidden-up"></textarea><br>
+
+        <input type="submit" value="Submit" id="application-submit-btn" class="hidden-left">
+    </form>
+</div>
+</div>
+</div>
+
+</div>
+<script src="application.js" defer></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</body>
+</html>
