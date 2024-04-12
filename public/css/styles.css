@@ -1,27 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
 }
 :root{
     --primary-color: rgb(216, 145, 12);
 }
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #f4f4f4;
-    padding: 20px;
+    height: 100vh;
 }
 
-button {
+#addJobBtn {
     padding: 10px 20px;
     font-size: 16px;
     background-color: var(--primary-color);
     color: #fff;
     border: none;
     cursor: pointer;
+    width: 100%;
+    border: 1px solid #f4f4f4;
+
 }
 
-button:hover {
+#addJobBtn:hover {
     background-color: rgb(152, 102, 8);
 }
 
@@ -95,7 +102,7 @@ input[type="submit"]:hover {
 /* table */
 table{
     width: 100%;
-    margin-top: 10px;
+    margin-top: 1px;
 }
 tbody{
     font-size: 12px;
@@ -170,4 +177,108 @@ h4{
     font-size: 0.75rem;
     color: red;
     display: none;
+}
+
+
+
+
+
+/* nav bar */
+/* navbar */
+.navbar{
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid black;
+    background: white !important;
+}
+img{
+    width: 100px;
+    height: 100px;
+    margin: 0 30px;
+}
+.menu{
+    margin: 0 30px;
+    background: var(--primary-color);
+    font-size: 2rem;
+    padding: 10px;
+    color: white;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+li{
+    font-size: 1rem;
+    padding: 12px 5px;
+    color: white;
+    font-weight: 900;
+}
+ul{
+    font-size: 0.75rem;
+    padding: 5px;
+    color: white;
+}
+.menu-bar{
+    background: var(--primary-color);
+    position: absolute;
+    right: 0%;
+    padding: 10px;
+    opacity: 0;
+}
+.menu-bar.active{
+    width: 50%;
+    height: 84.25vh;  
+    opacity: 1;
+    transition: opacity 2s, height 2s, width 2s; /* Smooth transition for opacity, height, and width */
+    overflow-y: hidden;
+}
+.menu-hidden {
+    opacity: 0; /* Initially set opacity to 0 */
+    height: 0; /* Initially set height to 0 */
+    width: 0; /* Initially set width to 0 */
+    overflow: hidden; /* Hide any overflowing content */
+}
+.view-flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+    border-bottom: 1px solid #f4f4f4;
+    color: white;
+    cursor: pointer;
+}
+.menu-hidden.active {
+    opacity: 1; /* Set opacity to 1 when active */
+    height: auto; /* Set height to auto to expand */
+    width: auto; /* Set width to auto to expand */
+    transition: opacity 2s, height 2s, width 2s; /* Smooth transition for opacity, height, and width */
+
+}
+.rotate{
+    transform: rotate(180deg);
+    transition: 2s;
+}
+
+@media screen and (max-width: 550px) {
+   td:nth-child(1){
+    display: none;
+   }
+   th:nth-child(1) {
+    display: none;
+   }
+   td:nth-child(4){
+    display: none;
+   }
+   th:nth-child(4) {
+    display: none;
+   }
+
+}
+
+@media screen and (max-width: 375px) {
+    td:nth-child(3) {
+        display: none;
+    }
+    th:nth-child(3) {
+        display: none;
+    }
 }

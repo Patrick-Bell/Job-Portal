@@ -9,8 +9,32 @@
 </head>
 <body>
 
+    <div class="filter-container">
+        <h1>Filters</h1>
+        <div class="search-container">
+        <input type="text" class="search-bar" id="search-bar" placeholder="Search Job Title...">
+    </div>
+        <select name="job-type-option" id="job-type-option">Job type
+            <option value="" disabled selected>Select a Job Type...</option>
+            <option value="all">All</option>
+            <option value="contract" id="contract">Contract</option>
+            <option value="permanent" id="permanent">Permanent</option>
+        </select>
+        <select name="job-schedule-option" id="job-schedule-option">Job type
+            <option value="" disabled selected>Select a Work Schedule...</option>
+            <option value="all">All</option>
+            <option value="remote" id="remote">Remote</option>
+            <option value="hybrid" id="hybrid">Hybrid</option>
+        </select>
+        <div id="reset-btn">Reset Filters</div>
+        <div id="job-count-info"></div>
+    </div>
+    
+
     <div class="jobs-container">
     </div>
+
+    <div id="pagination-container"></div>
       
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

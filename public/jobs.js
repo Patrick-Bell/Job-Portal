@@ -1,19 +1,17 @@
 const allJobsContainer = document.querySelector('.jobs-container');
+const jobTypeFilter = document.getElementById('job-type-option');
+const workScheduleFilter = document.getElementById('job-schedule-option');
+let allJobs = []; // Define allJobs outside the function
+let jobs = []
+const paginationContainer = document.getElementById('pagination-container')
 
-async function renderAllJobs() {
+async function renderAllJobs(jobs) {
     try {
-        // Execute the query to find all job listings
-        const response = await axios.get('/api/joblist');
-        const jobs = response.data;
-
-        const openJobs = jobs.filter(job => job.status === 'open')
-        console.log('openjobs', openJobs)
-
         // Clear the container before rendering
         allJobsContainer.innerHTML = '';
 
         // Render job cards
-        openJobs.forEach(job => {
+        jobs.map(job => {
             // Truncate job description to 100 characters
             const shortDesc = job.jobDescription.slice(0, 100) + '...';
             const formattedDate = new Date(job.datePosted).toLocaleDateString();
@@ -39,27 +37,107 @@ async function renderAllJobs() {
 
             // Append job card HTML to container
             allJobsContainer.insertAdjacentHTML('beforeend', jobCardHTML);
+            
         });
+
+        const jobCountInfo = document.getElementById('job-count-info');
+        if (jobs.length === 0) {
+            jobCountInfo.textContent = 'No Jobs Found'
+        } else {
+            jobCountInfo.innerHTML = `Showing <strong>${jobs.length}</strong> jobs`;
+        }
 
         // Add event listeners to view buttons
         const viewBtns = document.querySelectorAll('.view');
         viewBtns.forEach(btn => {
-        btn.addEventListener('click', (event) => {
-        const job = JSON.parse(event.target.dataset.job);
-        const queryParams = new URLSearchParams();
-        for (const key in job) {
-            queryParams.append(key, job[key]);
-        }
-        queryParams.append('jobId', job.id);
-        const queryString = queryParams.toString();
-        window.location.href = `/apply?${queryString}`;
-    });
-});
-
-
+            btn.addEventListener('click', (event) => {
+                const job = JSON.parse(event.target.dataset.job);
+                const queryParams = new URLSearchParams();
+                for (const key in job) {
+                    queryParams.append(key, job[key]);
+                }
+                queryParams.append('jobId', job.id);
+                const queryString = queryParams.toString();
+                window.location.href = `/apply?${queryString}`;
+            });
+        });
     } catch (error) {
         console.log(error);
     }
 }
 
-renderAllJobs();
+async function fetchAndRenderAllJobs() {
+    try {
+        // Execute the query to find all job listings
+        const response = await axios.get('/api/joblist');
+        jobs = response.data; // Store all jobs fetched from the server
+        allJobs = jobs.filter(job => job.status === 'open'); // Filter open jobs
+        renderAllJobs(allJobs); // Render all open jobs
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function filterJobsByCategories(jobType, workSchedule, searchQuery) {
+    let filteredJobs = allJobs;
+
+    // Apply job type filter
+    if (jobType && jobType !== 'all') {
+        console.log(jobType)
+        filteredJobs = filteredJobs.filter(job => job.jobType.toLowerCase() === jobType);
+    }
+
+    // Apply work schedule filter
+    if (workSchedule && workSchedule !== 'all') {
+        filteredJobs = filteredJobs.filter(job => job.workSchedule.toLowerCase().includes(workSchedule));
+    }
+
+    // Apply search query filter
+    if (searchQuery) {
+        const lowercaseSearchQuery = searchQuery.toLowerCase();
+        filteredJobs = filteredJobs.filter(job => job.jobTitle.toLowerCase().includes(lowercaseSearchQuery) || job.jobDescription.toLowerCase().includes(lowercaseSearchQuery));
+    }
+
+    renderAllJobs(filteredJobs);
+}
+
+
+jobTypeFilter.addEventListener("change", () => {
+    const selectedJobType = jobTypeFilter.value; // Renamed to selectedJobType for clarity
+    const selectedWorkSchedule = workScheduleFilter.value;
+    const searchQuery = document.getElementById('search-bar').value;
+    filterJobsByCategories(selectedJobType, selectedWorkSchedule, searchQuery);
+});
+
+
+workScheduleFilter.addEventListener("change", () => {
+    const selectedJobType = jobTypeFilter.value; // Renamed to selectedJobType for clarity
+    const selectedWorkSchedule = workScheduleFilter.value;
+    const searchQuery = document.getElementById('search-bar').value;
+    filterJobsByCategories(selectedJobType, selectedWorkSchedule, searchQuery);
+});
+
+document.getElementById('search-bar').addEventListener("input", () => {
+    const selectedJobType = jobTypeFilter.value; // Renamed to selectedJobType for clarity
+    const selectedWorkSchedule = workScheduleFilter.value;
+    const searchQuery = document.getElementById('search-bar').value;
+    filterJobsByCategories(selectedJobType, selectedWorkSchedule, searchQuery);
+});
+
+
+const resetFiltersBtn = document.getElementById('reset-btn')
+
+
+resetFiltersBtn.addEventListener("click", () => {
+    document.getElementById('search-bar').value = '';
+    jobTypeFilter.value = '';
+    workScheduleFilter.value = '';
+    filterJobsByCategories('', '', ''); // Reset filters
+
+    // Update the job count info
+    renderAllJobs(allJobs);
+});
+
+
+
+fetchAndRenderAllJobs()

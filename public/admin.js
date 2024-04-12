@@ -314,45 +314,83 @@ const deleteJob = async (row, jobId) => {
 
 
 const toggleApplicantInfo = (row, applicants) => {
-    const applicantRow = row.nextElementSibling;
-    if (applicantRow && applicantRow.classList.contains('applicant-row')) {
-        // If the applicant row exists, toggle its visibility
-        applicantRow.classList.toggle('hidden');
-    } else {
-        // Otherwise, create a new row and display applicant info
-        const applicantInfo = document.createElement('tr');
-        applicantInfo.classList.add('applicant-row'); // Add classes for identification and initial hiding
-        const cell = applicantInfo.insertCell(0);
-        cell.colSpan = 6; // Span the entire row
-        
-        // Create heading
-        const heading = document.createElement('h4');
-        heading.textContent = 'Applicants';
-        cell.appendChild(heading);
-        
-        // Add applicant information
-        applicants.forEach((applicant, index) => {
-            const date = applicant.dateApplied
-            const formattedDate = new Date(date).toLocaleDateString()
-            const applicantInfoItem = document.createElement('div');
-            applicantInfoItem.innerHTML = `
-                <strong>Applicant Number:</strong> ${index + 1}<br>
-                <strong>Name:</strong> ${applicant.name}<br>
-                <strong>Email:</strong> ${applicant.email}<br>
-                <strong>Number:</strong> ${applicant.number}<br>
-                <strong>Applied:</strong> ${formattedDate}<br>
-                <strong>Linkedin Profile</strong> <a href="${applicant.linkedin}" target="_blank">Linkedin</a><br>
-                <strong>Cover Letter:</strong> ${applicant.coverLetter}<br>
-                <strong>CV:</strong> <a href="${applicant.cvFile}" target="_blank">Download CV</a>
-            `;
-            applicantInfoItem.classList.add('applicant-info');
-            cell.appendChild(applicantInfoItem);
-        });
+    // Check if screen width is greater than 550px (or any other threshold you prefer)
+    if (window.innerWidth > 550) {
+        const applicantRow = row.nextElementSibling;
+        const visibleColumnCount = row.cells.length;
+        console.log('Visible Column Count:', visibleColumnCount); // Log the visible column count
 
-        row.parentNode.insertBefore(applicantInfo, row.nextElementSibling);
+        if (applicantRow && applicantRow.classList.contains('applicant-row')) {
+            // If the applicant row exists, toggle its visibility
+            applicantRow.classList.toggle('hidden');
+        } else {
+            // Otherwise, create a new row and display applicant info
+            const applicantInfo = document.createElement('tr');
+            applicantInfo.classList.add('applicant-row'); // Add classes for identification and initial hiding
+            const cell = applicantInfo.insertCell(0);
+            cell.colSpan = 6; // Set the colSpan dynamically to match the number of visible columns
+
+            // Create heading
+            const heading = document.createElement('h4');
+            heading.textContent = 'Applicants';
+            cell.appendChild(heading);
+
+            // Add applicant information
+            applicants.forEach((applicant, index) => {
+                const date = applicant.dateApplied
+                const formattedDate = new Date(date).toLocaleDateString()
+                const applicantInfoItem = document.createElement('div');
+                applicantInfoItem.innerHTML = `
+                    <strong>Applicant Number:</strong> ${index + 1}<br>
+                    <strong>Name:</strong> ${applicant.name}<br>
+                    <strong>Email:</strong> ${applicant.email}<br>
+                    <strong>Number:</strong> ${applicant.number}<br>
+                    <strong>Applied:</strong> ${formattedDate}<br>
+                    <strong>Linkedin Profile</strong> <a href="${applicant.linkedin}" target="_blank">Linkedin</a><br>
+                    <strong>Cover Letter:</strong> ${applicant.coverLetter}<br>
+                    <strong>CV:</strong> <a href="${applicant.cvFile}" target="_blank">Download CV</a>
+                `;
+                applicantInfoItem.classList.add('applicant-info');
+                cell.appendChild(applicantInfoItem);
+            });
+
+            row.parentNode.insertBefore(applicantInfo, row.nextElementSibling);
+        }
+    } else {
+        console.log('This feature is only available on larger screens.');
     }
 };
 
+
+
 fetchAndDisplayJobsTable();
+
+
+// menu navigation
+
+
+function setUpMenuListeners() {
+    const viewMenu = document.querySelectorAll('.view-flex');
+    const subMenu = document.querySelectorAll('.menu-hidden');
+    const arrowIcons = document.querySelectorAll('.fa-arrow-down')
+
+    viewMenu.forEach((view, index) => {
+        view.addEventListener("click", () => {
+            subMenu[index].classList.toggle('active');
+            arrowIcons[index].classList.toggle('rotate');
+        })
+    })
+}
+
+
+
+const menu = document.querySelector('.menu');
+const menuContent = document.querySelector('.menu-bar');
+
+menu.addEventListener("click", () => {
+    menuContent.classList.toggle('active')
+})
+
+setUpMenuListeners()
 
 

@@ -7,6 +7,7 @@ const upload = require('./middleware/upload')
 const multer = require('multer')
 const JobListModel = require('./models/job-list');
 const JobApplicationModel = require('./models/job-application');
+const ReferralModel = require('./models/referral')
 
 
 const app = express();
@@ -54,6 +55,16 @@ app.get('/api/joblist/:id', async (req, res) => {
 });
 
 
+app.get('/api/referrals', async (req, res) => {
+    try {
+        const referralList = await ReferralModel.find()
+        res.status(200).json(referralList)
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'internal server error'})
+    }
+})
+
 app.get('/api/joblist', async (req, res) => {
     try {
         const jobList = await JobListModel.find().populate('applicants');
@@ -63,6 +74,29 @@ app.get('/api/joblist', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
+app.post('/api/referral', async (req, res) => {
+    try {
+        const { userName, userEmail, referralName, referralEmail, referralNumber } = req.body
+        const dateSubmitted = new Date()
+
+        const newReferral = new ReferralModel({
+            userName,
+            userEmail,
+            referralName,
+            referralEmail,
+            referralNumber,
+            dateSubmitted,
+        })
+
+        const savedReferral = await newReferral.save()
+        res.status(200).json(savedReferral)
+
+    } catch(error) {
+        console.log(error);
+        res.status(500).json({ error: 'internal error'})
+    }
+})
 
 
 app.post('/api/submit-application', (req, res) => {

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+    <title>Job Portal - Home</title>
+</head>
+<body>
+    <div class="swiper">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper">
+          <!-- Slides -->
+          <div class="swiper-slide"><i class="bi bi-tags-fill"></i> New Jobs! <i class="bi bi-tags-fill"></i> </div>
+          <div class="swiper-slide">£1000 for a successful referral!</div>
+          <div class="swiper-slide">Technology events coming soon...</div>
+        </div>
+      </div>
+
+      <div class="navbar">
+        <img src="/images/testlogo.jpeg" alt="">
+        <i class="fa-solid fa-bars menu hidden-left"></i>
+    </div>
+    
+    <div class="menu-bar">
+        
+        <div class="view-flex">
+            <li class="view">Home</li>
+            <i class="fa-solid fa-arrow-down"></i>
+            </div>
+            <div class="menu-hidden">
+            <ul>About Us</ul>
+            <ul>Referrals</ul>
+            </div>
+
+
+        <div class="view-flex">
+        <li class="view">Clients</li>
+        <i class="fa-solid fa-arrow-down"></i>
+        </div>
+        <div class="menu-hidden">
+        <ul>Why work with us</ul>
+        <ul>Who works with us</ul>
+        </div>
+    
+    
+
+        <div class="view-flex">
+            <li class="view">Candidates</li>
+            <i class="fa-solid fa-arrow-down"></i>
+            </div>
+            <div class="menu-hidden">
+            <ul>Search Open Vacancies</ul>
+            <ul>Why work through us</ul>
+            <ul>Referal Scheme</ul>
+            </div>
+    </div>
+
+
+    <div class="referral-container">
+        <h1 id="refer-text-1">REFER A FRIEND TO US</h1>
+        <h4 id="refer-text-2">Every month, we rewards many people for recommending a friend to us. Refer a friend today, and if we place them, 
+            you'll earn up to £1,000</h4>
+        <h2>How does it work?</h2>
+        <h4>Click the button below to begin the referral process. If we place them, you will earn up to £1,000 - it's that simple!
+        </h4>
+        <button id="refer-btn">Refer a friend</button>
+        <div class="refer-application">
+            <h2>Referral Application Form</h2>
+            <h3>Your Details</h3>
+            <input type="text" name="user-name" id="user-name" placeholder="* Your Name">
+            <input type="email" name="user-email" id="user-email" placeholder="* Your Email">
+            <h3>Your Friend</h3>
+            <input type="text" name="referral-name" id="referral-name" placeholder="* Your Friends Name">
+            <input type="email" name="referral-email" id="referral-email" placeholder="* Your Friends Email">
+            <input type="number" name="referral-number" id="referral-number" placeholder="* Your Friends Number">
+            <button id="submit-referral">Submit</button>
+
+            <h6 id="view-terms">View Terms & Conditions</h6>
+
+            <div class="terms-container">
+            <h6>Criteria for a successful referral</h6>
+            <li>Referral must be placed within 12 months from date submitted</li>
+            <li>Referral must remain on site for a minimum of 3 months</li>
+            <li>Referral must be submitted via application form and not emailed</li>
+            <li>Form must contain number and email</li>
+        </div>
+        </div>
+    </div>
+    
+      
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="home.js"></script>
+</body>
+</html>
