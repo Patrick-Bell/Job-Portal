@@ -16,22 +16,6 @@ body {
     height: 100vh;
 }
 
-#addJobBtn {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: var(--primary-color);
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    border: 1px solid #f4f4f4;
-
-}
-
-#addJobBtn:hover {
-    background-color: rgb(152, 102, 8);
-}
-
 dialog {
     border: 2px solid var(--primary-color);
     border-radius: 5px;
@@ -100,13 +84,15 @@ input[type="submit"]:hover {
 
 
 /* table */
-table{
-    width: 100%;
-    margin-top: 1px;
+table, #referral-table{
+    width: calc(100% - 5px);
+    border-radius: 25%;
+    margin: 5px;
 }
-tbody{
+tbody, #referral-table tbody{
     font-size: 12px;
     text-align: center;
+    border-radius: 0.4rem;
 }
 thead{
     background: var(--primary-color);
@@ -114,6 +100,7 @@ thead{
 }
 th{
     padding: 10px;
+    border-radius: 0.4rem;
 }
 tr{
     padding: 10px;
@@ -132,9 +119,10 @@ tr{
     text-align: left;
 }
 /* Target all cells in the table */
-#jobTable td {
+#jobTable td, #referral-table td {
     padding: 10px; /* Adjust the value as needed */
     background: white;
+    border-radius: 0.4rem;
 }
 h4{
     padding: 5px;
@@ -256,6 +244,101 @@ ul{
 .rotate{
     transform: rotate(180deg);
     transition: 2s;
+}
+
+/* pagination */
+#pagination-container, #referral-pagination-container{
+    display: flex;
+    margin-left: 5px;
+}
+.pagination-btn{
+    background: var(--primary-color);
+    color: white;
+    padding: 10px;
+    margin: 5px 0;
+}
+.pagination-btn:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
+.job-page-info, .referral-job-page-info{
+    margin: 10px 0 5px 10px
+}
+#search-input{
+    width: calc(100% - 10px);
+    padding: 20px;
+    margin: 5px;
+}
+#referral-prev-page-btn, #prev-page-btn{
+    border-radius: 0.4rem 0 0 0.4rem;
+}
+#referral-next-page-btn, #next-page-btn{
+    border-radius: 0 0.4rem 0.4rem 0;
+}
+
+
+/* reminder grid and container */
+.referral-reminder-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 20px; /* Gap between the containers */
+}
+
+
+.reminder-container {
+    background: var(--primary-color);
+    padding: 10px;
+    margin: 0 5px 5px 5px;
+    color: white;
+    border-radius: 0.4rem;
+}
+.flex-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px;
+    border-bottom: 1px solid white;
+}
+.text-bold{
+    font-weight: 900;
+}
+
+
+
+/* heading boxes */
+
+.header-buttons-container{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.75rem;
+    margin: 5px;
+}
+.header-buttons-container button{
+    padding: 30px;
+    font-size: 16px;
+    border-radius: 0.4rem;
+    border: none;
+    outline: none;
+    background: var(--primary-color);
+    color: white;
+}
+
+
+#addJobBtn {
+    color: var(--primary-color);
+    background: white;
+    cursor: pointer;
+    border: 3px dotted var(--primary-color)
+}
+
+
+
+
+
+@media screen and (max-width: 670px) {
+    .referral-reminder-container{
+        display: block;
+    }
 }
 
 @media screen and (max-width: 550px) {

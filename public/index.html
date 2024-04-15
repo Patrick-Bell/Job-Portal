@@ -48,7 +48,18 @@
             </div>
     </div>
 
+
+    <div class="header-buttons-container">
     <button id="addJobBtn">Add Job</button>
+    <button id="generate-report-btn">Generate Job Report</button>
+    <button id="gen-ref-report">Generate Referral Report</button>
+    <button id="log-out">Log Out</button>
+    </div>
+
+
+
+
+    <input type="text" id="search-input" placeholder="Search Job Title/Description/Type...">
 
     <table id="jobTable">
         <thead>
@@ -63,7 +74,59 @@
         </thead>
         <tbody></tbody>
     </table>
+    <div id="pagination-container">
+        <div id="prev-page-btn" class="pagination-btn"><</div>
+        <div id="next-page-btn" class="pagination-btn">></div>
+        <div class="job-page-info"></div>
+    </div>
 
+
+
+    <div class="referral-reminder-container">
+        <div class="referral-table-container">
+            <table id="referral-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Referral</th>
+                        <th>Expires</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div id="referral-pagination-container">
+                <div id="referral-prev-page-btn" class="pagination-btn"><</div>
+                <div id="referral-next-page-btn" class="pagination-btn">></div>
+                <div class="referral-job-page-info"></div>
+            </div>
+        </div>
+    
+        <div class="reminder-container">
+           <h2>Statistics</h2>
+           <div class="flex-container">
+            <div class="text-bold">Total Jobs</div>
+            <div class="total-jobs"></div>
+           </div>
+           <div class="flex-container">
+            <div class="text-bold">Open Jobs</div>
+            <div class="total-open-jobs"></div>
+           </div>
+           <div class="flex-container">
+            <div class="text-bold">Contract Jobs</div>
+            <div class="total-contract-jobs"></div>
+           </div>
+           <div class="flex-container">
+            <div class="text-bold">Permanent Jobs</div>
+            <div class="total-permanent-jobs"></div>
+           </div>
+           <div class="flex-container">
+            <div class="text-bold">Referrals</div>
+            <div class="total-referrals"></div>
+           </div>
+        </div>
+    </div>
+    
 
 
 

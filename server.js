@@ -8,6 +8,7 @@ const multer = require('multer')
 const JobListModel = require('./models/job-list');
 const JobApplicationModel = require('./models/job-application');
 const ReferralModel = require('./models/referral')
+const { generatePDFReport } = require('./important')
 
 
 const app = express();
@@ -97,6 +98,18 @@ app.post('/api/referral', async (req, res) => {
         res.status(500).json({ error: 'internal error'})
     }
 })
+
+app.get('/api/generate-pdf', async (req, res) => {
+    try {
+        const filePath = await generatePDFReport();
+        // Send the PDF file as a response
+        res.download(filePath, 'job_report.pdf');
+    } catch (error) {
+        console.error('Error generating PDF report:', error);
+        res.status(500).send('Error generating PDF report');
+    }
+});
+
 
 
 app.post('/api/submit-application', (req, res) => {

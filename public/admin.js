@@ -11,6 +11,8 @@ const permContainer = document.querySelector('.perm-container')
 
 const editJobModal = document.getElementById('editModal')
 
+const showAllButton = document.querySelector('.show-all')
+
 addJobBtn.addEventListener("click", () => {
     jobModal.showModal();
 });
@@ -130,27 +132,245 @@ function resetForm() {
 
 
 
+
+/* referral table */
+
+const referralTableBody = document.querySelector('#referral-table tbody');
+// Pagination variables
+
+
+let currentJobPage = 1;
+const jobsPerPage = 5; // Adjust as needed
+let totalJobs = 0; // Variable to store total number of jobs
+
+// Pagination variables for referral table
+let currentReferralsPage = 1;
+const referralsPerPage = 3; // Adjust as needed
+let totalReferrals = 0; // Variable to store total number of referrals
+
+
+
+const fetchAndDisplayReferralTable = async () => {
+    try {
+        const response = await axios.get('/api/referrals');
+        let referrals = response.data;
+        console.log(referrals)
+
+        totalReferrals = referrals.length; // Corrected variable name
+
+
+        // Calculate pagination values
+        const startIndex = (currentReferralsPage - 1) * referralsPerPage;
+        const endIndex = Math.min(startIndex + referralsPerPage, totalReferrals);
+        const paginatedReferrals = referrals.slice(startIndex, endIndex);
+
+
+        // Clear the table before inserting new rows
+        referralTableBody.innerHTML = '';
+
+        paginatedReferrals.forEach(referral => {
+            displayReferral(referral);
+        });
+
+        updateReferralPaginationButtons()
+
+        const referralInfo = document.querySelector('.referral-job-page-info')
+        referralInfo.innerHTML = `Showing Referrals <strong>${startIndex + 1}</strong> - <strong>${endIndex}</strong>`
+
+
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+const displayReferral = (referral) => {
+    const datePosted = new Date(referral.datePosted);
+    const formattedDatePosted = datePosted.toLocaleDateString();
+
+    const oneYearLater = new Date(datePosted);
+    oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
+    const formattedOneYearLater = oneYearLater.toLocaleDateString();
+
+    const row = referralTableBody.insertRow();
+
+    const cell1 = row.insertCell(0);
+    cell1.innerHTML = `${referral.userName}<br>${referral.userEmail}`
+
+    const cell2 = row.insertCell(1);
+    cell2.innerHTML = `${referral.referralName}<br>${referral.referralEmail}<br>${referral.referralNumber}`
+
+    const cell3 = row.insertCell(2);
+    cell3.innerHTML = `${formattedOneYearLater}`;
+
+    const cell4 = row.insertCell(3)
+    cell4.innerHTML = `<div class="action-row"><i class="fa-solid fa-trash"></i></div>`
+}
+
+
+const updateReferralPaginationButtons = () => {
+    const totalPages = Math.ceil(totalReferrals / referralsPerPage);
+
+
+    const prevButton = document.getElementById('referral-prev-page-btn');
+    const nextButton = document.getElementById('referral-next-page-btn');
+
+    prevButton.disabled = currentReferralsPage === 1;
+    nextButton.disabled = currentReferralsPage === totalPages;
+
+};
+
+// Event listener for previous page butto
+
+
+fetchAndDisplayReferralTable()
+
+
+
 // table
 
 const tableBody = document.querySelector('tbody');
 const jobTable = document.querySelector('#jobTable');
 
-const fetchAndDisplayJobsTable = async () => {
+
+// Search feature variables
+const searchInput = document.getElementById('search-input');
+
+// Event listener for search input
+searchInput.addEventListener('input', () => {
+    currentJobPage = 1; // Reset to first page when search query changes
+    fetchAndDisplayJobsTable();
+});
+
+// Function to calculate total number of jobs
+const calculateTotalJobs = async () => {
     try {
         const response = await axios.get('/api/joblist');
         const jobs = response.data;
-        console.log(jobs);
 
-        // Clear the table before inserting new rows
-        tableBody.innerHTML = '';
-
-        jobs.forEach(job => {
-            displayJob(job);
-        });
+        // Apply search filter if search query exists
+        const searchQuery = searchInput.value.trim().toLowerCase();
+        if (searchQuery !== '') {
+            const filteredJobs = jobs.filter(job =>
+                job.jobTitle.toLowerCase().includes(searchQuery) ||
+                job.location.toLowerCase().includes(searchQuery) ||
+                job.jobDescription.toLowerCase().includes(searchQuery) ||
+                job.skills.toLowerCase().includes(searchQuery) ||
+                job.jobType.toLowerCase().includes(searchQuery)
+            );
+            totalJobs = filteredJobs.length;
+        } else {
+            totalJobs = jobs.length;
+        }
     } catch (error) {
         console.error(error);
     }
 };
+
+const fetchAndDisplayJobsTable = async () => {
+    try {
+        const response = await axios.get('/api/joblist');
+        let jobs = response.data;
+
+        // Apply search filter if search query exists
+        const searchQuery = searchInput.value.trim().toLowerCase();
+        if (searchQuery !== '') {
+            jobs = jobs.filter(job =>
+                job.jobTitle.toLowerCase().includes(searchQuery) ||
+                job.location.toLowerCase().includes(searchQuery) ||
+                job.jobDescription.toLowerCase().includes(searchQuery) ||
+                job.skills.toLowerCase().includes(searchQuery) ||
+                job.jobType.toLowerCase().includes(searchQuery)
+            );
+        }
+
+        // Update totalJobs based on the filtered jobs
+        totalJobs = jobs.length;
+
+        // Calculate pagination values
+        const startIndex = (currentJobPage - 1) * jobsPerPage;
+        const endIndex = Math.min(startIndex + jobsPerPage, totalJobs);
+        const paginatedJobs = jobs.slice(startIndex, endIndex);
+
+        // Clear the table before inserting new rows
+        tableBody.innerHTML = '';
+
+        paginatedJobs.forEach(job => {
+            displayJob(job);
+        });
+
+        // Update pagination buttons
+        updatePaginationButtons();
+
+        // Update job page info
+        const jobPageInfo = document.querySelector('.job-page-info');
+        jobPageInfo.innerHTML = `Showing Jobs <strong>${startIndex + 1}</strong> - <strong>${endIndex}</strong>`;
+
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+fetchAndDisplayJobsTable()
+
+// Function to update pagination buttons based on current page and total jobs
+const updatePaginationButtons = () => {
+    const totalPages = Math.ceil(totalJobs / jobsPerPage);
+
+
+    const prevButton = document.getElementById('prev-page-btn');
+    const nextButton = document.getElementById('next-page-btn');
+
+    prevButton.disabled = currentJobPage === 1;
+    nextButton.disabled = currentJobPage === totalPages;
+
+};
+
+
+
+// all pagination buttons and controls
+
+// Event listener for previous page button in jobs table
+document.getElementById('prev-page-btn').addEventListener('click', () => {
+    if (currentJobPage > 1) {
+        currentJobPage--;
+        fetchAndDisplayJobsTable();
+        updatePaginationButtons(); // Update pagination buttons for jobs table
+    }
+});
+
+// Event listener for next page button in jobs table
+document.getElementById('next-page-btn').addEventListener('click', () => {
+    const totalPages = Math.ceil(totalJobs / jobsPerPage);
+    if (currentJobPage < totalPages) {
+        currentJobPage++;
+        fetchAndDisplayJobsTable();
+        updatePaginationButtons(); // Update pagination buttons for jobs table
+    }
+});
+
+// Event listener for previous page button in referral table
+document.getElementById('referral-prev-page-btn').addEventListener('click', () => {
+    if (currentReferralsPage > 1) {
+        currentReferralsPage--;
+        fetchAndDisplayReferralTable();
+        updateReferralPaginationButtons(); // Update pagination buttons for referrals table
+    }
+});
+
+// Event listener for next page button in referral table
+document.getElementById('referral-next-page-btn').addEventListener('click', () => {
+    const totalPages = Math.ceil(totalReferrals / referralsPerPage);
+    if (currentReferralsPage < totalPages) {
+        currentReferralsPage++;
+        fetchAndDisplayReferralTable();
+        updateReferralPaginationButtons(); // Update pagination buttons for referrals table
+    }
+});
+
+
+
+
+
 
 const displayJob = (job) => {
     const numOfApps = job.applicants.length;
@@ -362,8 +582,53 @@ const toggleApplicantInfo = (row, applicants) => {
 };
 
 
+//statistics 
 
-fetchAndDisplayJobsTable();
+const updateStatistics = async () => {
+    try {
+        const response = await axios.get('/api/joblist');
+        const referralResponse = await axios.get('/api/referrals')
+        const jobs = response.data;
+        const referrals = referralResponse.data
+
+        const totalJobsElement = document.querySelector('.total-jobs');
+        const totalOpenJobsElement = document.querySelector('.total-open-jobs');
+        const totalContractJobsElement = document.querySelector('.total-contract-jobs');
+        const totalPermanentJobsElement = document.querySelector('.total-permanent-jobs');
+        const totalReferralsElement = document.querySelector('.total-referrals')
+
+        const totalJobs = jobs.length;
+        const totalReferrals = referrals.length
+        const totalOpenJobs = jobs.filter(job => job.status === 'open').length;
+        const totalContractJobs = jobs.filter(job => job.jobType === 'Contract').length;
+        const totalPermanentJobs = jobs.filter(job => job.jobType === 'Permanent').length;
+
+        totalJobsElement.textContent = totalJobs;
+        totalOpenJobsElement.textContent = totalOpenJobs;
+        totalContractJobsElement.textContent = totalContractJobs;
+        totalPermanentJobsElement.textContent = totalPermanentJobs;
+        totalReferralsElement.textContent = totalReferrals
+    } catch (error) {
+        console.error('Error updating statistics:', error);
+    }
+};
+
+// Call updateStatistics initially
+updateStatistics();
+
+
+
+document.getElementById('generate-report-btn').addEventListener('click', () => {
+    // Make a request to the server-side API endpoint using Axios
+    axios.get('/api/generate-pdf')
+        .then(response => {
+            console.log(response.data); // Log success message
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+});
+
 
 
 // menu navigation
