@@ -110,6 +110,8 @@ submitApplicationBtn.addEventListener("click", (event) => {
     const fullName = document.getElementById('fullName').value;
     const jobId = document.getElementById('jobId').value; // Assuming you have an input field with id 'jobId' to capture the job ID
 
+    console.log(jobId)
+
     // Save the data to localStorage
     localStorage.setItem('fullName', fullName);
     localStorage.setItem('jobId', jobId);
@@ -131,6 +133,8 @@ submitApplicationBtn.addEventListener("click", (event) => {
         formData.append('linkedin', linkedin);
         formData.append('coverLetter', coverLetter);
         formData.append('cvFile', cvFile);
+
+        console.log(formData)
 
         // Send the form data using Axios POST request
         axios.post('/api/submit-application', formData)

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/report.css">
+    <title>Job Portal</title>
+</head>
+<body>
+
+    <div class="download-container">   
+        <p class="hidden-up">Your report has been successfully generated.</p>
+        <button class="hidden-left" id="gen-btn"><i class="fa-solid fa-download"></i> Download Your Report</button>
+        <button class="hidden-right" id="print-btn"><i class="fa-solid fa-print"></i> Print Your Report</button>
+    </div>
+
+
+
+    <div class="report-pdf">
+    <div class="header">
+        <img src="/images/testlogo.jpeg" alt="">
+        <div class="header-block">
+            <p class="company-name">Company Name</p>
+            <p>Job Summary Report</p>
+            <p id="summary-date"></p>
+        </div>
+    </div>
+    <div class="divider"></div>
+
+    <h2>Permanent Job Report</h2>
+
+    <table>
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Salary</th>
+            <th>Work Schedule</th>
+            <th>Applicants</th>
+            <th>Date Posted</th>
+          </tr>
+        </thead>
+        <tbody id="permanent-jobs-body"></tbody>
+      </table>
+      
+      <h2>Contract Job Report</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Job Title</th>
+            <th>Salary</th>
+            <th>Work Schedule</th>
+            <th>Applicants</th>
+            <th>Date Posted</th>
+          </tr>
+        </thead>
+        <tbody id="contract-jobs-body"></tbody>
+      </table>
+
+      <div class="notes">
+        <h3>Notes</h3>
+        <p>For more information, please visit www.company-name-info.com</p>
+      </div>
+      
+    </div>
+
+    
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="report.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</body>
+</html>

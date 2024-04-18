@@ -255,7 +255,8 @@ const calculateTotalJobs = async () => {
                 job.location.toLowerCase().includes(searchQuery) ||
                 job.jobDescription.toLowerCase().includes(searchQuery) ||
                 job.skills.toLowerCase().includes(searchQuery) ||
-                job.jobType.toLowerCase().includes(searchQuery)
+                job.jobType.toLowerCase().includes(searchQuery) ||
+                job.jobId.includes(searchQuery)
             );
             totalJobs = filteredJobs.length;
         } else {
@@ -270,6 +271,7 @@ const fetchAndDisplayJobsTable = async () => {
     try {
         const response = await axios.get('/api/joblist');
         let jobs = response.data;
+        console.log(jobs)
 
         // Apply search filter if search query exists
         const searchQuery = searchInput.value.trim().toLowerCase();
@@ -279,7 +281,9 @@ const fetchAndDisplayJobsTable = async () => {
                 job.location.toLowerCase().includes(searchQuery) ||
                 job.jobDescription.toLowerCase().includes(searchQuery) ||
                 job.skills.toLowerCase().includes(searchQuery) ||
-                job.jobType.toLowerCase().includes(searchQuery)
+                job.jobType.toLowerCase().includes(searchQuery) ||
+                job.jobId.includes(searchQuery)
+
             );
         }
 
@@ -617,18 +621,15 @@ const updateStatistics = async () => {
 updateStatistics();
 
 
+const generateRepotrt = document.getElementById('generate-report-btn')
+generateRepotrt.addEventListener("click", () => {
+    window.location = 'report.html'
+})
 
-document.getElementById('generate-report-btn').addEventListener('click', () => {
-    // Make a request to the server-side API endpoint using Axios
-    axios.get('/api/generate-pdf')
-        .then(response => {
-            console.log(response.data); // Log success message
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-});
-
+const toJobPage = document.getElementById('gen-job-page')
+toJobPage.addEventListener("click", () => {
+    window.location = 'jobs.html'
+})
 
 
 // menu navigation

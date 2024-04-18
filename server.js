@@ -8,7 +8,10 @@ const multer = require('multer')
 const JobListModel = require('./models/job-list');
 const JobApplicationModel = require('./models/job-application');
 const ReferralModel = require('./models/referral')
-const { generatePDFReport } = require('./important')
+const ContactMessageModel = require('./models/message')
+const { dailyJobUpdate, newReferralEmail, newApplicantEmail } = require('./important')
+const cron = require('node-cron')
+
 
 
 const app = express();
@@ -56,6 +59,17 @@ app.get('/api/joblist/:id', async (req, res) => {
 });
 
 
+app.get('/api/messages', async (req, res) => {
+    try{
+        const messageList = await ContactMessageModel.find()
+        res.status(200).json(messageList)
+        
+    }catch(error) {
+        console.error(error)
+        res.status(500).json({ error: 'internal server error'})
+    }
+})
+
 app.get('/api/referrals', async (req, res) => {
     try {
         const referralList = await ReferralModel.find()
@@ -92,6 +106,7 @@ app.post('/api/referral', async (req, res) => {
 
         const savedReferral = await newReferral.save()
         res.status(200).json(savedReferral)
+        newReferralEmail(savedReferral)
 
     } catch(error) {
         console.log(error);
@@ -99,17 +114,27 @@ app.post('/api/referral', async (req, res) => {
     }
 })
 
-app.get('/api/generate-pdf', async (req, res) => {
-    try {
-        const filePath = await generatePDFReport();
-        // Send the PDF file as a response
-        res.download(filePath, 'job_report.pdf');
-    } catch (error) {
-        console.error('Error generating PDF report:', error);
-        res.status(500).send('Error generating PDF report');
-    }
-});
+app.post('/api/messages', async (req, res) => {
+    try{
+        const { id, name, email, message} = req.body
+        const dateSent = new Date()
 
+        const newMessage = new ContactMessageModel({
+            id,
+            name,
+            email,
+            message,
+            dateSent
+        })
+
+        const savedMessage = await newMessage.save()
+        res.status(200).json(savedMessage)
+
+    }catch(error) {
+        console.error(error)
+        res.status(500).json({ error: 'internal server error' })
+    }
+})
 
 
 app.post('/api/submit-application', (req, res) => {
@@ -127,6 +152,7 @@ app.post('/api/submit-application', (req, res) => {
 
             // Extract form data
             const { jobId, name, email, number, coverLetter, linkedin } = req.body;
+            console.log('Request Body:', req.body);
             const dateApplied = new Date();
             const cvFile = req.file ? req.file.path : '';
 
@@ -152,6 +178,8 @@ app.post('/api/submit-application', (req, res) => {
 
             // Respond with the saved job application data
             res.status(200).json(savedJobApplication);
+            console.log('New job application:', newJobApplication);
+            newApplicantEmail(newJobApplication)
         } catch (error) {
             console.error('Error submitting application:', error);
             res.status(500).json({ error: 'Internal server error' });
@@ -227,6 +255,11 @@ app.delete('/api/joblist/:id', async (req, res) => {
         res.status(500).json({ error: 'Error deleting product'})
     }
 })
+
+
+cron.schedule('0 9 * * *', () => {
+    dailyJobUpdate();
+});
 
 // Error handling middleware for Multer errors
 app.use(function(err, req, res, next) {

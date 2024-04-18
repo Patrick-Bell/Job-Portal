@@ -60,6 +60,7 @@ input[type="submit"], #close-btn {
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    margin: 0 10px;
 }
 input[type="submit"]:hover {
     background-color: #0056b3;
@@ -78,6 +79,9 @@ input[type="submit"]:hover {
 }
 .button-container{
     display: flex;
+    padding-top: 10px;
+    margin-top: 10px;
+    border-top: 2px solid var(--primary-color);
 }
 
 
@@ -323,6 +327,10 @@ ul{
     color: white;
 }
 
+.header-buttons-container button:hover{
+    opacity: 0.7;
+    cursor: pointer;
+}
 
 #addJobBtn {
     color: var(--primary-color);
@@ -354,7 +362,9 @@ ul{
    th:nth-child(4) {
     display: none;
    }
-
+   .header-buttons-container{
+    grid-template-columns: repeat(2, 1fr);
+   }
 }
 
 @media screen and (max-width: 375px) {
@@ -364,4 +374,8 @@ ul{
     th:nth-child(3) {
         display: none;
     }
+    .header-buttons-container{
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
+

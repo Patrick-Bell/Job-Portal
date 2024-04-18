@@ -1,6 +1,9 @@
 const mongoose = require('mongoose')
 
 const jobApplicationSchema = new mongoose.Schema({
+    jobId: {
+        type: String,
+    },
     dateApplied: {
         type: Date,
     },

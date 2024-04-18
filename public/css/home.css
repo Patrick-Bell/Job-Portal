@@ -17,8 +17,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 1px solid black;
     background: white !important;
+    box-shadow: 0 0 10px var(--primary-color);
 }
 img{
     width: 100px;
@@ -52,19 +52,24 @@ ul{
     right: 0%;
     padding: 10px;
     opacity: 0;
+    min-height: 100%;
 }
-.menu-bar.active{
-    width: 50%;
-    height: 84.25vh;  
+.menu-bar.active {
+    position: fixed; /* Fixed position so it remains in place even when scrolling */
+    top: 22.5%; /* Position at the top of the viewport */
+    left: 0; /* Position at the left edge of the viewport */
+    width: 100%; /* Cover the entire width of the viewport */
+    height: 100%; /* Cover the entire height of the viewport */
+    background-color: var(--primary-color); /* Adjust the background color as needed */
     opacity: 1;
-    transition: opacity 2s, height 2s, width 2s; /* Smooth transition for opacity, height, and width */
-    overflow-y: hidden;
+    z-index: 100;
+    overflow-y: auto; /* Enable vertical scrolling if the menu content exceeds viewport height */
+    transition: opacity 2s; /* Smooth transition for opacity */
 }
 .menu-hidden {
     opacity: 0; /* Initially set opacity to 0 */
     height: 0; /* Initially set height to 0 */
     width: 0; /* Initially set width to 0 */
-    overflow: hidden; /* Hide any overflowing content */
 }
 .view-flex{
     display: flex;
@@ -161,4 +166,88 @@ h6{
 }
 .active{
     display: block;
+}
+
+
+
+/* first part of website */
+
+.front-container{
+    width: 100%;
+    min-height: 70vh;
+    border: 1px solid black;
+    position: relative;
+}
+.fa-magnifying-glass{
+    color: white;
+}
+.text-container{
+    margin: 0 10px;
+    width: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+h2{
+    margin: 10px;
+}
+
+.search-all-jobs a{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}
+.search-all-jobs{
+    border: 1px solid white;
+    outline: none;
+    background: var(--primary-color);
+    padding: 12px 15px;
+    margin-top: 10px;
+    border-radius: 0.4rem;
+}
+
+
+/* carasel */
+
+h1{
+    text-align: center;
+    margin-bottom: 40px;
+}
+.wrapper{
+    display: flexbox;
+    align-items: center;
+    justify-content: center;
+    max-height: 100vh;
+}
+.slider{
+    height: 110px;
+    margin: auto;
+    overflow: hidden;
+    position: relative;
+    width: 80%;
+}
+.slider .slide-track {
+    animation: scroll 15s linear infinite;
+    display: flex;
+    width: calc(250px * 10);
+}
+.slider .slide{
+    height: 100px;
+    width: 500px;
+}
+.slider .slide img{
+    width: 80%;
+    height: 100px;
+    border-radius: 10px;
+    border: 2px solid #bbbbbb;
+}
+@keyframes scroll{
+    0%{
+        transform: translateX(0);
+    }
+    100%{
+        transform: translateX(calc(-250px * 5));
+    }
 }

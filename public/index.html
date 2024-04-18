@@ -9,6 +9,8 @@
 </head>
 <body>
 
+    <div class="large-container">
+
     <div class="navbar">
         <img src="/images/testlogo.jpeg" alt="">
         <i class="fa-solid fa-bars menu hidden-left"></i>
@@ -52,14 +54,14 @@
     <div class="header-buttons-container">
     <button id="addJobBtn">Add Job</button>
     <button id="generate-report-btn">Generate Job Report</button>
-    <button id="gen-ref-report">Generate Referral Report</button>
+    <button id="gen-job-page">View Job Page</button>
     <button id="log-out">Log Out</button>
     </div>
 
 
 
 
-    <input type="text" id="search-input" placeholder="Search Job Title/Description/Type...">
+    <input type="text" id="search-input" placeholder="Search Job Title / Description / Type / JobID...">
 
     <table id="jobTable">
         <thead>
@@ -242,6 +244,8 @@
         <input type="submit" value="Submit" id="submit-job-btn">
         <input type="button" value="close" id="close-btn">
     </div>
+
+    
     </dialog>
 
 
@@ -376,9 +380,13 @@
         <input type="button" value="close" id="edit-close-btn">
     </div>
     </dialog>
+
+</div>
       
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="report.js"></script>
     <script src="admin.js"></script>
 </body>
 </html>
