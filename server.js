@@ -92,10 +92,11 @@ app.get('/api/joblist', async (req, res) => {
 
 app.post('/api/referral', async (req, res) => {
     try {
-        const { userName, userEmail, referralName, referralEmail, referralNumber } = req.body
+        const { id, userName, userEmail, referralName, referralEmail, referralNumber } = req.body
         const dateSubmitted = new Date()
 
         const newReferral = new ReferralModel({
+            id,
             userName,
             userEmail,
             referralName,

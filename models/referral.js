@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const referralSchema = new mongoose.Schema({
+    id: String,
     userName: String,
     userEmail: String,
     referralName: String,

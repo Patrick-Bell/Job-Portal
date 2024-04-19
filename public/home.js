@@ -6,6 +6,15 @@ const swiper = new Swiper('.swiper', {
   
   });
 
+  function generateRandomId() {
+    min = 1;
+    max = 1000000
+
+    const randomId = Math.floor(Math.random() * (max - min + 1) + min)
+
+    return randomId.toString()
+}
+
   function setUpMenuListeners() {
     const viewMenu = document.querySelectorAll('.view-flex');
     const subMenu = document.querySelectorAll('.menu-hidden');
@@ -48,6 +57,7 @@ submitReferral.addEventListener("click", async () => { // Add async keyword here
     const referralNumber = document.getElementById('referral-number').value
 
     const referral = {
+        id: generateRandomId(),
         userName: name,
         userEmail: email,
         referralName: referralName,
