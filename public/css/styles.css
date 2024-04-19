@@ -123,7 +123,7 @@ tr{
     text-align: left;
 }
 /* Target all cells in the table */
-#jobTable td, #referral-table td {
+#jobTable td, #referral-table td, #messageTable td {
     padding: 10px; /* Adjust the value as needed */
     background: white;
     border-radius: 0.4rem;
@@ -142,6 +142,16 @@ h4{
     padding: 10px;
     border-radius: 0.4rem;
     cursor: pointer;
+}
+.fa-check{
+    background: green;
+    color: white;
+    padding: 10px;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+.fa-check:hover{
+    opacity: 0.7;
 }
 .fa-pen-to-square{
     background: var(--primary-color);
@@ -251,7 +261,7 @@ ul{
 }
 
 /* pagination */
-#pagination-container, #referral-pagination-container{
+#pagination-container, #referral-pagination-container, #message-pagination-container{
     display: flex;
     margin-left: 5px;
 }
@@ -265,18 +275,18 @@ ul{
     opacity: 0.7;
     cursor: pointer;
 }
-.job-page-info, .referral-job-page-info{
-    margin: 10px 0 5px 10px
+.job-page-info, .referral-job-page-info, .message-job-page-info{
+    margin: 15px 0 5px 10px
 }
 #search-input{
     width: calc(100% - 10px);
     padding: 20px;
     margin: 5px;
 }
-#referral-prev-page-btn, #prev-page-btn{
+#referral-prev-page-btn, #prev-page-btn, #message-prev-page-btn{
     border-radius: 0.4rem 0 0 0.4rem;
 }
-#referral-next-page-btn, #next-page-btn{
+#referral-next-page-btn, #next-page-btn, #message-next-page-btn{
     border-radius: 0 0.4rem 0.4rem 0;
 }
 
@@ -339,6 +349,38 @@ ul{
     border: 3px dotted var(--primary-color)
 }
 
+
+
+/* loader */
+.loader{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: grey;
+    transition: opacity 0.75s, visibility 0.75s;
+}
+.loader--hidden{
+    opacity: 0;
+    visibility: hidden;
+}
+.loader::after{
+    content: '';
+    width: 75px;
+    height: 75px;
+    border: 15px solid #dddddd;
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: loading 0.75s ease infinite;
+}
+@keyframes loading{
+    from { transform: rotate(0turn) }
+    to { transform: rotate(1turn) }
+}
 
 
 

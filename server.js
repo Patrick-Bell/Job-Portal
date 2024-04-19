@@ -9,7 +9,7 @@ const JobListModel = require('./models/job-list');
 const JobApplicationModel = require('./models/job-application');
 const ReferralModel = require('./models/referral')
 const ContactMessageModel = require('./models/message')
-const { dailyJobUpdate, newReferralEmail, newApplicantEmail } = require('./important')
+const { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail } = require('./important')
 const cron = require('node-cron')
 
 
@@ -117,7 +117,7 @@ app.post('/api/referral', async (req, res) => {
 
 app.post('/api/messages', async (req, res) => {
     try{
-        const { id, name, email, message} = req.body
+        const { id, name, email, message, responded } = req.body
         const dateSent = new Date()
 
         const newMessage = new ContactMessageModel({
@@ -125,17 +125,35 @@ app.post('/api/messages', async (req, res) => {
             name,
             email,
             message,
-            dateSent
+            dateSent,
+            responded,
         })
 
         const savedMessage = await newMessage.save()
         res.status(200).json(savedMessage)
+        newMessageEmail(savedMessage)
 
     }catch(error) {
         console.error(error)
         res.status(500).json({ error: 'internal server error' })
     }
 })
+
+// Backend route to update the responded status of a message
+app.put('/api/messages/:id', async (req, res) => {
+    try {
+        const messageId = req.params.id;
+        const { responded } = req.body;
+
+        // Update the message in the database
+        await ContactMessageModel.findOneAndUpdate({ id: messageId }, { responded });
+
+        res.status(200).json({ success: true, message: 'Message responded status updated' });
+    } catch (error) {
+        console.error('Error updating message responded status:', error);
+        res.status(500).json({ success: false, message: 'Failed to update message responded status' });
+    }
+});
 
 
 app.post('/api/submit-application', (req, res) => {

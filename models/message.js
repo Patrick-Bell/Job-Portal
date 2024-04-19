@@ -5,7 +5,13 @@ const contactMessageSchema = new mongoose.Schema({
     name: String,
     email: String,
     message: String,
-})
+    dateSent: String,
+    responded: {
+        type: String,
+        enum: ["yes", "no"],
+        default: "no"
+    }
+});
 
 const contactMessageModel = mongoose.model('Messages', contactMessageSchema)
 

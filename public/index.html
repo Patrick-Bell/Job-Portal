@@ -9,6 +9,8 @@
 </head>
 <body>
 
+    <div class="loader"></div>
+
     <div class="large-container">
 
     <div class="navbar">
@@ -126,10 +128,29 @@
             <div class="text-bold">Referrals</div>
             <div class="total-referrals"></div>
            </div>
+           <div class="flex-container">
+            <div class="text-bold">Messages</div>
+            <div class="total-messages"></div>
+           </div>
         </div>
     </div>
     
-
+    <table id="messageTable">
+        <thead>
+            <tr>
+                <th>User</th>
+                <th>Date</th>
+                <th>Message</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div id="message-pagination-container">
+        <div id="message-prev-page-btn" class="pagination-btn"><</div>
+        <div id="message-next-page-btn" class="pagination-btn">></div>
+        <div class="message-job-page-info"></div>
+    </div>
 
 
 

@@ -131,6 +131,107 @@ function resetForm() {
 }
 
 
+// messages table
+const messageTable = document.querySelector('#messageTable tbody')
+let currentMessagePage = 1
+const messagesPerPage = 3
+let totalMessages = 0
+
+const fetchAndDisplayMessageTable = async () => {
+    try {
+        const response = await axios.get('/api/messages');
+        let messages = response.data;
+        console.log(messages)
+
+        const openMessages = messages.filter(message => message.responded === 'no')
+
+        totalMessages = openMessages.length; // Corrected variable name
+
+
+        // Calculate pagination values
+        const startIndex = (currentMessagePage - 1) * messagesPerPage;
+        const endIndex = Math.min(startIndex + messagesPerPage, totalMessages);
+        const formattedMessages = messages.filter(message => message.responded === 'no')
+        const paginatedMessages = formattedMessages.slice(startIndex, endIndex);
+
+
+        // Clear the table before inserting new rows
+        messageTable.innerHTML = '';
+
+        paginatedMessages.forEach(message => {
+            displayMessage(message);
+        });
+
+        updateMessagePaginationButtons()
+
+        const messageInfo = document.querySelector('.message-job-page-info')
+        messageInfo.innerHTML = `Showing Messages <strong>${startIndex + 1}</strong> - <strong>${endIndex}</strong> | View all <a href="/messages">messages</a>`
+
+
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+const displayMessage = (message) => {
+    const date = message.dateSent;
+    const formattedDate = new Date(date).toLocaleDateString()
+    const messageId = message.id
+    
+    
+    const row = messageTable.insertRow();
+
+    const cell1 = row.insertCell(0);
+    cell1.innerHTML = `${message.name} - ${message.email}`
+
+    const cell2 = row.insertCell(1);
+    cell2.textContent = formattedDate
+
+    const cell3 = row.insertCell(2);
+    cell3.textContent = message.message;
+
+    const cell4 = row.insertCell(3)
+    cell4.innerHTML = `<div class="action-row"><i class="fa-solid fa-trash"></i><i class="fa-solid fa-check"></i></div>`
+    const checkButton = cell4.querySelector('.fa-check')
+    checkButton.addEventListener("click", () => {
+        respondedJob(row, messageId)
+    })
+}
+
+
+const updateMessagePaginationButtons = () => {
+    const totalPages = Math.ceil(totalMessages / messagesPerPage);
+
+
+    const prevButton = document.getElementById('message-prev-page-btn');
+    const nextButton = document.getElementById('message-next-page-btn');
+
+    prevButton.disabled = currentMessagePage === 1;
+    nextButton.disabled = currentMessagePage === totalPages;
+
+};
+
+
+const respondedJob = async (row, messageId) => {
+    try {
+        const response = await axios.put(`/api/messages/${messageId}`, { responded: 'yes' });
+        console.log('Message responded status updated:', response.data);
+
+        row.remove()
+
+        fetchAndDisplayMessageTable()
+    } catch (error) {
+        console.error('Error updating message responded status:', error);
+    }
+
+}
+
+
+// end of message table code
+
+
+
+
 
 
 /* referral table */
@@ -223,6 +324,8 @@ const updateReferralPaginationButtons = () => {
 
 
 fetchAndDisplayReferralTable()
+fetchAndDisplayMessageTable()
+
 
 
 
@@ -368,6 +471,23 @@ document.getElementById('referral-next-page-btn').addEventListener('click', () =
         currentReferralsPage++;
         fetchAndDisplayReferralTable();
         updateReferralPaginationButtons(); // Update pagination buttons for referrals table
+    }
+});
+document.getElementById('message-prev-page-btn').addEventListener('click', () => {
+    if (currentMessagePage > 1) {
+        currentMessagePage--;
+        fetchAndDisplayMessageTable();
+        updateMessagePaginationButtons(); // Update pagination buttons for referrals table
+    }
+});
+
+// Event listener for next page button in referral table
+document.getElementById('message-next-page-btn').addEventListener('click', () => {
+    const totalPages = Math.ceil(totalMessages / messagesPerPage);
+    if (currentMessagePage < totalPages) {
+        currentMessagePage++;
+        fetchAndDisplayMessageTable();
+        updateMessagePaginationButtons(); // Update pagination buttons for referrals table
     }
 });
 
@@ -592,26 +712,32 @@ const updateStatistics = async () => {
     try {
         const response = await axios.get('/api/joblist');
         const referralResponse = await axios.get('/api/referrals')
+        const messagesReponse = await axios.get('/api/messages')
         const jobs = response.data;
         const referrals = referralResponse.data
+        const messages = messagesReponse.data
 
         const totalJobsElement = document.querySelector('.total-jobs');
         const totalOpenJobsElement = document.querySelector('.total-open-jobs');
         const totalContractJobsElement = document.querySelector('.total-contract-jobs');
         const totalPermanentJobsElement = document.querySelector('.total-permanent-jobs');
         const totalReferralsElement = document.querySelector('.total-referrals')
+        const totalMessagesElement = document.querySelector('.total-messages')
 
         const totalJobs = jobs.length;
+        const totalMessages = messages.length
         const totalReferrals = referrals.length
         const totalOpenJobs = jobs.filter(job => job.status === 'open').length;
         const totalContractJobs = jobs.filter(job => job.jobType === 'Contract').length;
         const totalPermanentJobs = jobs.filter(job => job.jobType === 'Permanent').length;
+        
 
         totalJobsElement.textContent = totalJobs;
         totalOpenJobsElement.textContent = totalOpenJobs;
         totalContractJobsElement.textContent = totalContractJobs;
         totalPermanentJobsElement.textContent = totalPermanentJobs;
         totalReferralsElement.textContent = totalReferrals
+        totalMessagesElement.textContent = totalMessages
     } catch (error) {
         console.error('Error updating statistics:', error);
     }
@@ -655,6 +781,11 @@ const menuContent = document.querySelector('.menu-bar');
 
 menu.addEventListener("click", () => {
     menuContent.classList.toggle('active')
+})
+
+window.addEventListener('load', () => {
+    const loader = document.querySelector('.loader')
+    loader.classList.add('loader--hidden')
 })
 
 setUpMenuListeners()

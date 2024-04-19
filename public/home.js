@@ -105,5 +105,84 @@ function resetForm() {
     setUpMenuListeners()
 }
 
+const submitMessageBtn = document.querySelector('.send-message-btn');
+
+function checkValidation() {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    if (name.length > 1 && message.length > 10 && email.length > 5) {
+        submitMessageBtn.removeAttribute('disabled');
+    } else {
+        submitMessageBtn.setAttribute('disabled', 'disabled');
+    }
+}
+
+document.getElementById('name').addEventListener('input', checkValidation);
+document.getElementById('email').addEventListener('input', checkValidation);
+document.getElementById('message').addEventListener('input', checkValidation);
+
+checkValidation();
+
+submitMessageBtn.addEventListener("click", async () => {
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('message').value;
+
+    // Check if any of the form fields are empty
+    if (name.trim() === '' || email.trim() === '' || message.trim() === '') {
+        alert('Please fill out all required fields.');
+        return; // Prevent further execution of the function
+    }
+
+    submitMessageBtn.classList.add('effect1');
+
+    const contactMessage = {
+        id: generateRandomId(),
+        name: name,
+        email: email,
+        message: message,
+        responded: 'no'
+    };
+
+    console.log(contactMessage);
+
+    try {
+        const res = await axios.post('/api/messages', contactMessage);
+        console.log(res); // Log the entire response object
+
+        if (res.status === 200) {
+            console.log('data sent successfully', contactMessage);
+            console.log(res.data);
+
+            setTimeout(() => {
+                submitMessageBtn.classList.remove('effect1');
+                submitMessageBtn.classList.add('effect2');
+                removeContactForm();
+                console.log('adding effect2');
+                
+                setTimeout(() => {
+                    submitMessageBtn.classList.remove('effect2');
+                    console.log('removing effect2');
+                }, 3000); // Remove effect2 after 3 seconds
+            }, 2000); // Remove effect1 after 2 seconds
+            
+            // Re-enable the button if it was disabled during form validation
+        }
+
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+function removeContactForm() {
+    document.getElementById('name').value = '';
+    document.getElementById('email').value = '';
+    document.getElementById('message').value = '';
+}
+
+
 
 setUpMenuListeners()

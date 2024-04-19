@@ -6,6 +6,47 @@ const nodemailer = require('nodemailer')
 
 // add a new message email - coming soon...
 
+const newMessageEmail = async (newMessage) => {
+    try{
+        const { id, name, email, message } = newMessage
+        const today = new Date()
+        const formattedDate = today.toLocaleDateString()
+
+        const emailContent = `
+        <p><strong>A new message has been recieved.</strong></p>
+        <strong>Name:</strong> ${name}<br>
+        <strong>Email:</strong> ${email}<br>
+        <strong>Message:</strong> ${message}<br>
+        <strong>Date:</strong> ${formattedDate}<br><br>
+        To view the message, please go to the admin dashboard. Once the email has been responded to, click the green check. This will update the email
+        status and remove it from the table but it will remain on the database. If you need to view all messages, you can navigate to the page.
+        `
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.USER,
+                pass: process.env.PASS,
+            }
+        })
+
+        await transporter.sendMail({
+            from: process.env.USER,
+            to: process.env.USER,
+            subject: `A new message - ${id}`,
+            html: emailContent
+        })
+
+        console.log('email sent succesfully')
+
+    }catch(error) {
+        console.error(error)
+    }
+}
+
+
+
+
 const newApplicantEmail = async (newJobApplication) => {
     try {
         // Extract information about the new referral
@@ -191,4 +232,4 @@ const dailyJobUpdate = async () => {
     }
 }
 
-module.exports = { dailyJobUpdate, newReferralEmail, newApplicantEmail } 
+module.exports = { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail } 

@@ -182,7 +182,6 @@ h6{
     height: 80vh;
     position: relative;
 }
-
 .front-container::before {
     content: "";
     position: absolute;
@@ -190,24 +189,21 @@ h6{
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('/images/back.png');
+    /*background: url('/images/back.png');*/
     background-size: cover;
     background-position: center;
-    filter: blur(3px);
+    filter: blur(-1px);
     z-index: -1;
 }
-
-
-
 
 .fa-magnifying-glass{
     color: white;
     margin: 0 5px;
 }
 h1{
-    font-size: 4.5rem;
+    font-size: 4rem;
     text-align: center;
-    font-weight: 800;
+    font-weight: 900;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -280,6 +276,82 @@ button{
     100%{
         transform: translateX(calc(-250px * 5));
     }
+}
+
+
+
+
+/* contact us section */
+.contact-us-container{
+    background: var(--primary-color);
+    width: 100%;
+    padding: 10px;
+}
+.lg-text{
+    font-size: 1.5rem;
+    text-align: center;
+}
+.s-text{
+    text-align: center;
+}
+.contact-us-container input, textarea{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px auto 0 auto;
+    resize: none;
+}
+.send-message-btn{
+    outline: none;
+    width: 13rem;
+    height: 4rem;
+    background: var(--primary-color);
+    color: white;
+    border-radius: 4rem;
+    text-align: center;
+    border: .2rem solid white;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: all 0.2s ease;
+      &::before{
+        content: 'Send Message';
+    }
+
+
+}
+.effect1{
+    width: 4rem;
+    border-color: white;
+    border-right-color: var(--primary-color);
+    border-width: 0.3rem;
+    animation: rotate 1s linear infinite;
+    font-size: 0;
+}
+
+@keyframes rotate{
+    0%{
+        transform: rotate(0deg);
+    }
+    100%{
+        transform: rotate(360deg);
+    }
+}
+.effect2 {
+    background: green; /* Change background color to green */
+}
+
+.effect2::before {
+    content: '\f00c'; /* Unicode value for the checkmark icon */
+    font-family: 'Font Awesome 5 Free'; /* Font Awesome font family */
+    color: white;
+}
+
+.effect2::before{
+    content: '\f00c';
+    font-family: 'FontAwesome';
+    color: white;
 }
 
 
