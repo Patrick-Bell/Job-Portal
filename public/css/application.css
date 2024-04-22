@@ -7,7 +7,9 @@
     scroll-behavior: smooth;
 }
 :root{
-    --primary-color: rgb(216, 145, 12);
+    --primary-color: #262F4C;
+    --secondary-color: #E2EFF7;
+    --light-background: E7E7E9;
 }
 .hide-input{
     background: white;

@@ -9,7 +9,7 @@ const JobListModel = require('./models/job-list');
 const JobApplicationModel = require('./models/job-application');
 const ReferralModel = require('./models/referral')
 const ContactMessageModel = require('./models/message')
-const { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail } = require('./important')
+const { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail, sendAppliacntEmail } = require('./important')
 const cron = require('node-cron')
 
 
@@ -199,6 +199,7 @@ app.post('/api/submit-application', (req, res) => {
             res.status(200).json(savedJobApplication);
             console.log('New job application:', newJobApplication);
             newApplicantEmail(newJobApplication)
+            sendAppliacntEmail(newJobApplication)
         } catch (error) {
             console.error('Error submitting application:', error);
             res.status(500).json({ error: 'Internal server error' });

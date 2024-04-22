@@ -6,6 +6,44 @@ const nodemailer = require('nodemailer')
 
 // add a new message email - coming soon...
 
+
+const sendAppliacntEmail = async (savedJobApplication) => {
+    try{
+        const { jobId, name, email } = savedJobApplication
+        const today = new Date()
+        const formattedDate = today.toLocaleDateString()
+
+        const emailContent = `
+        Hi ${name}.<br>
+        Thank you for your application to job ${jobId}.<br>
+        Please keep an eye on your emails as we are working through the candidates who have applied for this position.<br>
+        If you have any question, feel free to reach out on techtroops-info@gmail.com.<br>
+        To view more jobs, please click <a href="jobs.html">here</a>
+        `
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.USER,
+                pass: process.env.PASS,
+            }
+        })
+
+        await transporter.sendMail({
+            from: process.env.USER,
+            to: email,
+            subject: `Job Application Confirmation - ${formattedDate}`,
+            html: emailContent
+        })
+
+        console.log('email sent succesfully')
+
+    }catch(error) {
+        console.error(error)
+    }
+}
+
+
 const newMessageEmail = async (newMessage) => {
     try{
         const { id, name, email, message } = newMessage
@@ -232,4 +270,4 @@ const dailyJobUpdate = async () => {
     }
 }
 
-module.exports = { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail } 
+module.exports = { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail, sendAppliacntEmail } 

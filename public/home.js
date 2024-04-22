@@ -6,6 +6,42 @@ const swiper = new Swiper('.swiper', {
   
   });
 
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show'); // Add .show class when element is intersecting
+        } 
+    });
+});
+
+const hiddenUp = document.querySelectorAll('.hidden-up')
+const hiddenRight = document.querySelectorAll('.hidden-right')
+const hiddenLeft = document.querySelectorAll('.hidden-left')
+hiddenUp.forEach((el) => observer.observe(el))
+hiddenRight.forEach((el) => observer.observe(el))
+hiddenLeft.forEach((el) => observer.observe(el))
+
+
+  const referralPrize = document.querySelector('.referralvalue')
+  let interval = 10000
+  let startValue = 0
+  let endValueString = referralPrize.getAttribute('data-value')
+
+  let endValue = parseFloat(endValueString)
+
+  console.log(endValue)
+
+  let duration = Math.floor(interval / endValue)
+  let counter = setInterval(function() {
+    startValue += 1;
+    referralPrize.textContent = '£' + startValue
+    if (startValue === endValue) {
+        clearInterval(counter)
+    }
+  }, duration)
+
+
   function generateRandomId() {
     min = 1;
     max = 1000000
@@ -36,18 +72,18 @@ menu.addEventListener("click", () => {
 })
 
 const referralApplicationForm = document.querySelector('.refer-application');
-const termsAndConditionsContainer = document.querySelector('.terms-container');
 const submitReferral = document.getElementById('submit-referral')
 const referBtn = document.getElementById('refer-btn')
-const viewTermsBtn = document.getElementById('view-terms')
+const closeReferralBtn = document.getElementById('close-referral')
 
 referBtn.addEventListener("click", () => {
     referralApplicationForm.style.display = "block"
 })
 
-viewTermsBtn.addEventListener("click", () => {
-    termsAndConditionsContainer.classList.toggle('active')
-});
+closeReferralBtn.addEventListener("click", () => {
+    referralApplicationForm.style.display = "none"
+})
+
 
 submitReferral.addEventListener("click", async () => { // Add async keyword here
     const name = document.getElementById('user-name').value
@@ -89,7 +125,6 @@ function resetForm() {
     document.getElementById('referral-email').value = ''
     document.getElementById('referral-number').value = ''
 
-    termsAndConditionsContainer.style.display = "none"
     referralApplicationForm.style.display = "none"
 
     referTtext1.innerHTML = "Thank you for your referral"
@@ -173,6 +208,8 @@ submitMessageBtn.addEventListener("click", async () => {
 
     } catch (error) {
         console.log(error);
+        submitMessageBtn.classList.remove('effect1')
+        submitMessageBtn.classList.add('effect3')
     }
 });
 

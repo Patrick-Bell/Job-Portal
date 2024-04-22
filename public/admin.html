@@ -28,7 +28,7 @@
       </div>
 
       <div class="navbar">
-        <img src="/images/testlogo.jpeg" alt="">
+        <img src="/images/tt-logo.png" class="hidden-right" alt="">
         <i class="fa-solid fa-bars menu hidden-left"></i>
     </div>
     
@@ -67,14 +67,18 @@
     </div>
 
     <div class="front-container">
-        <div class="text-container">
+        <div class="text-container hidden-left">
             <div class="inner-text-container">
-        <h1><span>T</span>ECH<span> T</span>ROOP</h1>
+        <div class="display-text">
+            <h1><span>T</span>ech</h1>
+            <h1><span>T</span>roops</h1>
+        </div>
         <h5>Tech Troop are one of the UK’s fastest growing Technology and Digital Resource Specialists, recognised for placing professionals in the
              UK’s largest companies, SMEs or niche startups in both Permanent and Contract roles, providing Teams and Consultancy Services</h5>
         <button class="search-all-jobs"><i class="fa-solid fa-magnifying-glass" ></i><a href="/jobs.html"> Search all jobs</a></button>
     </div>
     </div>
+    <img src="/images/phone-pic.JPG" class="hidden-right" alt="">
     </div>
 
 
@@ -83,7 +87,7 @@
 
 
     <div class="wrapper">
-        <h1>Companies we work with</h1>
+        <div class="wrapper-text">Work with some of the world's most inspiring brands</div>
         <div class="slider">
             <div class="slide-track">
                 <div class="slide">
@@ -118,27 +122,67 @@
                 </div>
             </div>
         </div>
+        <button class="wrapper-btn">View our clients</button>
     </div>
 
 
+    <div class="stat-wrapper">
+        <div class="text-title">Join our journey</div>
+        <p class="small-text stat-text">
+            Tech Troop is a recent startup that operates in the technology sector, offering services for both contract and permanent job placements. Founded recently, Tech Troop specializes 
+            in connecting talented professionals with employers seeking tech expertise. The company's focus extends across various domains within the tech industry, catering to roles 
+            ranging from software development and data analysis to cybersecurity and IT support. With its innovative approach and commitment to matching the right talent with the right 
+            opportunities, Tech Troop has quickly gained traction in the tech recruitment market, carving out a niche for itself as a reliable partner for both job seekers and employers 
+            in the ever-evolving tech landscape. So far, we have achieved:</p>
+        <div class="stat-card-container">
+            <div class="stat-card hidden-up">
+                <i class="fa-solid fa-angles-up"></i>
+                <div class="inner-card-container">
+                <i class="fa-solid fa-face-smile"></i>
+                <p class="stat-t">Happy Customers</p>
+                <p class="stat-st">So far, we have helped over 30 customers achieve their goals and fulfill their tech needs. Our dedicated team works tirelessly to ensure each customer 
+                    receives personalized attention and finds the perfect solution for their requirements. With our commitment to excellence and customer satisfaction, we continue to 
+                    strive towards making a positive impact in the tech community.</p>
+                    <button class="stat-btn">Find out more!</button>
+            </div>
+            </div>
+            <div class="stat-card hidden-up">
+                <i class="fa-solid fa-angles-up"></i>
+                <div class="inner-card-container">
+                <i class="fa-solid fa-face-smile"></i>
+                <p class="stat-t">Happy Customers</p>
+                <p class="stat-st">So far, we have helped over 30 customers achieve their goals and fulfill their tech needs. Our dedicated team works tirelessly to ensure each customer 
+                    receives personalized attention and finds the perfect solution for their requirements. With our commitment to excellence and customer satisfaction, we continue to 
+                    strive towards making a positive impact in the tech community.</p>
+                    <button class="stat-btn">Find out more!</button>
+            </div>
+            </div>
+            <div class="stat-card hidden-up">
+                <i class="fa-solid fa-angles-up"></i>
+                <div class="inner-card-container">
+                <i class="fa-solid fa-face-smile"></i>
+                <p class="stat-t">Happy Customers</p>
+                <p class="stat-st">So far, we have helped over 30 customers achieve their goals and fulfill their tech needs. Our dedicated team works tirelessly to ensure each customer 
+                    receives personalized attention and finds the perfect solution for their requirements. With our commitment to excellence and customer satisfaction, we continue to 
+                    strive towards making a positive impact in the tech community.</p>
+                    <button class="stat-btn">Find out more!</button>
+            </div>
+            </div>
+            
+           
+        </div>
+    </div>
+
+    <!-- (1) happy customers/reviews (2) number of placements (3) -->
 
 
 
-
-
-
-
-
-
-
-
-
-
+<div class="referral-background">
     <div class="referral-container">
         <h1 id="refer-text-1">REFER A FRIEND TO US</h1>
         <h4 id="refer-text-2">Every month, we rewards many people for recommending a friend to us. Refer a friend today, and if we place them, 
-            you'll earn up to £1,000</h4>
-        <button id="refer-btn">Refer a friend</button>
+            you'll earn up to: <div class="referralvalue hidden-up" data-value="1000">1000</div></h4>
+        <button id="refer-btn" class="hidden-up">Refer a friend</button>
         <div class="refer-application">
             <h2>Referral Application Form</h2>
             <h3>Your Details</h3>
@@ -148,35 +192,220 @@
             <input type="text" name="referral-name" id="referral-name" placeholder="* Your Friends Name">
             <input type="email" name="referral-email" id="referral-email" placeholder="* Your Friends Email">
             <input type="number" name="referral-number" id="referral-number" placeholder="* Your Friends Number">
-            <button id="submit-referral">Submit</button>
-
-            <h6 id="view-terms">View Terms & Conditions</h6>
-
-            <div class="terms-container">
-            <h6>Criteria for a successful referral</h6>
-            <li>Referral must be placed within 12 months from date submitted</li>
-            <li>Referral must remain on site for a minimum of 3 months</li>
-            <li>Referral must be submitted via application form and not emailed</li>
-            <li>Form must contain number and email</li>
+            <div class="flex-container">
+            <button id="submit-referral">Submit</button> <button id="close-referral">Close</button>
         </div>
+
         </div>
     </div>
+</div>
+
+
+<div class="reviews-container">
+    <div class="text-title">What our clients say</div>
+    <div class="testimonial-box-container">
+        <div class="testimonial-box hidden-left">
+            <div class="box-top">
+                <div class="profile">
+                    <div class="profile-img">
+                        <img src="/images/profile1.jpeg" alt="">
+                    </div>
+                    <div class="name-user">
+                        <strong>John Doe</strong>
+                        <span>@johndoeweb</span>
+                    </div>
+                </div>
+                <div class="reviews">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="client-comment">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis commodi aspernatur sequi quas maiores, eius unde illum suscipit totam ducimus necessitatibus. Placeat, animi dolorum consequatur adipisci odit soluta illum reiciendis?</p>
+            </div>
+        </div>
+        <div class="testimonial-box hidden-right">
+            <div class="box-top">
+                <div class="profile">
+                    <div class="profile-img">
+                        <img src="/images/profile1.jpeg" alt="">
+                    </div>
+                    <div class="name-user">
+                        <strong>John Doe</strong>
+                        <span>@johndoeweb</span>
+                    </div>
+                </div>
+                <div class="reviews">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="client-comment">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis commodi aspernatur sequi quas maiores, eius unde illum suscipit totam ducimus necessitatibus. Placeat, animi dolorum consequatur adipisci odit soluta illum reiciendis?</p>
+            </div>
+        </div>
+        <div class="testimonial-box hidden-left">
+            <div class="box-top">
+                <div class="profile">
+                    <div class="profile-img">
+                        <img src="/images/profile1.jpeg" alt="">
+                    </div>
+                    <div class="name-user">
+                        <strong>John Doe</strong>
+                        <span>@johndoeweb</span>
+                    </div>
+                </div>
+                <div class="reviews">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="client-comment">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis commodi aspernatur sequi quas maiores, eius unde illum suscipit totam ducimus necessitatibus. Placeat, animi dolorum consequatur adipisci odit soluta illum reiciendis?</p>
+            </div>
+        </div>
+        <div class="testimonial-box hidden-right">
+            <div class="box-top">
+                <div class="profile">
+                    <div class="profile-img">
+                        <img src="/images/profile1.jpeg" alt="">
+                    </div>
+                    <div class="name-user">
+                        <strong>John Doe</strong>
+                        <span>@johndoeweb</span>
+                    </div>
+                </div>
+                <div class="reviews">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="far fa-star"></i>
+                </div>
+            </div>
+            <div class="client-comment">
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Facilis commodi aspernatur sequi quas maiores, eius unde illum suscipit totam ducimus necessitatibus. Placeat, animi dolorum consequatur adipisci odit soluta illum reiciendis?</p>
+            </div>
+        </div>
+    </div>
+    <button class="stat-btn hidden-up">View more!</button>
+
+</div>
+
+
+<div class="referral-container">
+    <h1>test</h1>
+</div>
     
 
-
-    <div class="contact-us-container">
+<div class="contact-grid">
+    <div class="contact-info hidden-left">
+        <div class="small-text title">Let's get in touch</div>
+        <div class="small-text">Need help? Submit a message via our contact form and we'll get back to you within 2 working days. If you prefer to email us directly, or to call, please
+            see below our contact information. Also, please connect with us on all social media platforms!
+        </div>
+        <div class="flex-container">
+            <i class="fa-solid fa-map-location-dot"></i>
+            <div class="small-text">1 Cherry Drive London, E2 0RS</div>
+        </div>
+        <div class="flex-container">
+            <i class="fa-solid fa-envelope-circle-check"></i>            
+            <div class="small-text">techtroop-info@gmail.com</div>
+        </div>
+        <div class="flex-container">
+            <i class="fa-solid fa-phone-volume"></i>
+            <div class="small-text">+44 7717 382 283</div>
+        </div>
+        <div class="small-text title">Connect with us:</div>
+        <div class="flex-container">
+            <i class="fa-brands fa-square-facebook"></i>
+            <i class="fa-brands fa-square-twitter"></i>
+            <i class="fa-brands fa-linkedin"></i>
+            <i class="fa-brands fa-youtube"></i>
+            <i class="fa-brands fa-square-instagram"></i>
+        </div>
+    </div>
+    <div class="contact-us-container hidden-right">
         <div class="lg-text">Contact Us</div>
         <div class="s-text">Please fill out the form to get in touch!</div>
+        <div class="square"></div>
             <input type="text" name="name" id="name" required placeholder="Name">
             <input type="email" name="email" id="email" required placeholder="Email">
             <textarea name="message" id="message" cols="30" rows="10" required placeholder="Message"></textarea>
             <button class="send-message-btn" disabled></button>
     </div>
+
+</div>
+
+<footer>
+    <img src="/images/footer-img.png" alt="">
+    <div class="footer-grid">
+        <div class="footer-header">Clients
+            <ul>
+                <li><a href="">Who we are</a></li>
+                <li><a href="">Who we are</a></li>
+                <li><a href="">Who we are</a></li>
+            </ul>
+        </div>
+        <div class="footer-header">Candidates
+            <ul>
+                <li><a href="">Referrals</a></li>
+                <li><a href="">Referrals</a></li>
+                <li><a href="">Referrals</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-header">Information
+            <ul>
+                <li><a href="">FAQs</a></li>
+                <li><a href="">FAQs</a></li>
+                <li><a href="">FAQs</a></li>
+                <li><a href="">FAQs</a></li>
+            </ul>
+        </div>
+        <div class="footer-header">Socials
+            <ul>
+                <li><a href="">Facebook</a></li>
+                <li><a href="">Facebook</a></li>
+                <li><a href="">Facebook</a></li>
+                <li><a href="">Facebook</a></li>
+            </ul>
+        </div>
+        <div class="footer-header">Address
+            <ul>
+                <p>1 Cherry Drive</p>
+                <p>London</p>
+                <p>E0 0AA</p>
+            </ul><br>
+            <div class="footer-header">Contact
+                <ul>
+                    <p>techtroop-info@gmail.com</p>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="line"></div>
+    <p class="footer-text">By clicking on some of the links above, you will leave the website and be directed to a third-party website. The privacy practices of those third parties may differ from 
+        those of Tech Troop. We recommend you review the privacy statements of those third party websites, as Tech Troop is not responsible for those third parties' privacy or security 
+        practices</p>
+    <p class="footer-text">Tech Troop Recruitment Ltd © 2024</p>
+  
+
+</footer>
     
       
 
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/patrickbell1302/30min?primary_color=d8910c', text: 'Book Meeting', color: '#d8910c', textColor: '#ffffff', branding: undefined }); }</script>
+<script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/patrickbell1302/30min?primary_color=262F4C', text: 'Book Meeting', color: '#262F4C', textColor: '#ffffff', branding: undefined }); }</script>
 <!-- Calendly badge widget end -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
