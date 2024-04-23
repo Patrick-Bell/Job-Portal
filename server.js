@@ -9,7 +9,7 @@ const JobListModel = require('./models/job-list');
 const JobApplicationModel = require('./models/job-application');
 const ReferralModel = require('./models/referral')
 const ContactMessageModel = require('./models/message')
-const { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail, sendAppliacntEmail } = require('./important')
+const { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail, sendAppliacntEmail } = require('./email')
 const cron = require('node-cron')
 
 

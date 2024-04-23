@@ -6,6 +6,50 @@ const swiper = new Swiper('.swiper', {
   
   });
 
+  const scrolls = document.querySelectorAll('.scroll-click');
+  const menuContent = document.querySelector('.menu-bar');
+  const viewMenu = document.querySelectorAll('.view-flex');
+  const subMenu = document.querySelectorAll('.menu-hidden');
+  const arrowIcons = document.querySelectorAll('.fa-arrow-down');
+  const menu = document.querySelector('.menu');
+  
+  // Set up event listeners for menu items
+
+   // Set up event listener for menu toggle
+   menu.addEventListener("click", () => {
+    menuContent.classList.toggle('active');
+    console.log('clicking menu icon')
+});
+
+
+  function setUpMenuListeners() {
+    viewMenu.forEach((view, index) => {
+        view.addEventListener("click", () => {
+            subMenu[index].classList.toggle('active');
+            arrowIcons[index].classList.toggle('rotate');
+        })
+    })
+}
+  
+  // Set up event listener for scroll clicks
+  scrolls.forEach(scroll => {
+      scroll.addEventListener("click", () => {
+          console.log('clicked');
+          menuContent.classList.toggle('active');
+      });
+  });
+  
+
+
+
+  const toTopIcon = document.querySelector('.fa-caret-up')
+  toTopIcon.addEventListener("click", () => {
+    scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    })
+  })
+
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
@@ -51,25 +95,7 @@ hiddenLeft.forEach((el) => observer.observe(el))
     return randomId.toString()
 }
 
-  function setUpMenuListeners() {
-    const viewMenu = document.querySelectorAll('.view-flex');
-    const subMenu = document.querySelectorAll('.menu-hidden');
-    const arrowIcons = document.querySelectorAll('.fa-arrow-down')
 
-    viewMenu.forEach((view, index) => {
-        view.addEventListener("click", () => {
-            subMenu[index].classList.toggle('active');
-            arrowIcons[index].classList.toggle('rotate');
-        })
-    })
-}
-
-const menu = document.querySelector('.menu');
-const menuContent = document.querySelector('.menu-bar');
-
-menu.addEventListener("click", () => {
-    menuContent.classList.toggle('active')
-})
 
 const referralApplicationForm = document.querySelector('.refer-application');
 const submitReferral = document.getElementById('submit-referral')
