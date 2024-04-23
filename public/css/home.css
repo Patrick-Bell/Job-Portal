@@ -13,6 +13,20 @@
 }
 
 
+.fa-caret-up {
+    position: fixed;
+    font-size: 2rem;
+    bottom: 20px; /* Adjust as needed */
+    left: 20px; /* Adjust as needed */
+    z-index: 999; /* Ensure it's above other content */
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 0.75rem;
+}
+
+
 /* navbar */
 .navbar{
     width: 100% !important;
@@ -632,20 +646,6 @@ footer{
     font-size: 0.8rem;
     text-align: center;
 }
-.fa-caret-up{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2.5rem;
-    text-align: center;
-    margin: auto auto !important;
-    width: 100%;
-    background: var(--secondary-color);
-    color: var(--primary-color);
-    cursor: pointer;
-}
-
-
 
 /* event container */
 .event-container {
@@ -710,6 +710,9 @@ footer{
     }
     .footer-grid{
         grid-template-columns: repeat(2, 1fr);
+    }
+    .menu-bar.active{
+        top: 22px;
     }
 }
 @media screen and (max-width: 1060px) {

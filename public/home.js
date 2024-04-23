@@ -42,8 +42,9 @@ const swiper = new Swiper('.swiper', {
 
 
 
-  const toTopIcon = document.querySelector('.fa-caret-up')
+  const toTopIcon = document.querySelector('.back-to-top')
   toTopIcon.addEventListener("click", () => {
+    console.log('clicked icon')
     scrollTo({
         top: 0,
         behavior: 'smooth'
