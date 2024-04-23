@@ -638,6 +638,15 @@ footer{
 
 
 @media screen and (max-width: 400px) {
+    .box-top{
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .reiviews{
+        margin-top: 10px;
+    }
+}
+@media screen and (max-width: 650px) {
     h1{
         font-size: 2.5rem;
         border: 1px solid black;
@@ -648,15 +657,6 @@ footer{
         text-align: center;
         margin: auto auto;
     }
-    .box-top{
-        flex-wrap: wrap;
-        margin-bottom: 10px;
-    }
-    .reiviews{
-        margin-top: 10px;
-    }
-}
-@media screen and (max-width: 650px) {
     .stat-card-container{
         display: block;
     }
