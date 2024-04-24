@@ -287,6 +287,7 @@ const fetchAndDisplayReferralTable = async () => {
 const displayReferral = (referral) => {
     const datePosted = new Date(referral.datePosted);
     const formattedDatePosted = datePosted.toLocaleDateString();
+    const referralId = referral.id
 
     const oneYearLater = new Date(datePosted);
     oneYearLater.setFullYear(oneYearLater.getFullYear() + 1);
@@ -305,6 +306,10 @@ const displayReferral = (referral) => {
 
     const cell4 = row.insertCell(3)
     cell4.innerHTML = `<div class="action-row"><i class="fa-solid fa-trash"></i></div>`
+    const deleteBtn = cell4.querySelector('.fa-trash')
+    deleteBtn.addEventListener("click", () => {
+        deleteReferral(referralId, row)
+    })
 }
 
 
@@ -326,6 +331,20 @@ const updateReferralPaginationButtons = () => {
 fetchAndDisplayReferralTable()
 fetchAndDisplayMessageTable()
 
+
+const deleteReferral = async (referralId, row) => {
+    try {
+        const response = await axios.delete(`/api/referrals/${referralId}`)
+        console.log('deleetd referral', response.data)
+        row.remove()
+        updateStatistics();
+        updateReferralPaginationButtons();
+        fetchAndDisplayReferralTable();
+
+    } catch(error) {
+        console.log(error)
+    }
+}
 
 
 

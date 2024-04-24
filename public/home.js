@@ -6,6 +6,37 @@ const swiper = new Swiper('.swiper', {
   
   });
 
+
+  const accordianHeader = document.querySelectorAll('.accordian-header');
+  const accordianDesc = document.querySelectorAll('.accordian-desc');
+  const plusIcon = document.querySelectorAll('.fa-plus')
+
+  function accordionMenu() {
+    accordianHeader.forEach((accordion, index) => {
+        accordion.addEventListener("click", () => {
+            // Toggle active class for accordion description
+            accordianDesc[index].classList.toggle('active');
+            
+            plusIcon[index].classList.toggle('fa-minus');
+            
+            // Add back fa-plus class when accordion is collapsed
+            if (accordianDesc[index].classList.contains('active')) {
+                plusIcon[index].classList.remove('fa-plus')
+                plusIcon[index].classList.add('fa-minus');
+            } else {
+                plusIcon[index].classList.add('fa-plus')
+                plusIcon[index].classList.remove('fa-minus');
+            }
+        });
+    });
+}
+
+  
+  accordionMenu()
+
+
+
+
   const scrolls = document.querySelectorAll('.scroll-click');
   const menuContent = document.querySelector('.menu-bar');
   const viewMenu = document.querySelectorAll('.view-flex');

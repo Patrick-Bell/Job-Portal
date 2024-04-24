@@ -276,6 +276,20 @@ app.delete('/api/joblist/:id', async (req, res) => {
     }
 })
 
+app.delete('/api/referrals/:id', async (req, res) => {
+    const referralId = req.params.id;
+    try {
+        const result = await ReferralModel.deleteOne({ id: referralId });
+        if (result.deletedCount === 0) {
+            return res.status(404).json({ error: 'error deleting referral' });
+        }
+        return res.status(200).json({ message: 'referral deleted successfully' });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ error: 'error deleting referral' });
+    }
+});
+
 
 cron.schedule('0 9 * * *', () => {
     dailyJobUpdate();

@@ -16,8 +16,91 @@ body{
     background-size: contain;
     z-index: -1;
     backdrop-filter: blur(5px); /* Apply blur effect */
+}
+
+/* navbar */
+
+/* navbar */
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white !important;
+    z-index: 100;
+}
+img{
+    width: 100px;
+    height: 100px;
+    margin: 0 30px;
+}
+.menu{
+    margin: 0 30px;
+    background: var(--primary-color);
+    font-size: 2rem;
+    padding: 10px;
+    color: white;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+.view-flex li{
+    font-size: 1rem;
+    padding: 12px 5px;
+    color: white;
+    font-weight: 900;
+    list-style: none;
+}
+ul{
+    font-size: 0.75rem;
+    padding: 5px;
+    color: white;
+}
+.menu-bar{
+    background: var(--primary-color);
+    position: absolute;
+    right: 0%;
+    padding: 10px;
+    opacity: 0;
+}
+.menu-bar.active {
+    position: fixed; /* Fixed position so it remains in place even when scrolling */
+    top: 23.5%; /* Position at the top of the viewport */
+    left: 0; /* Position at the left edge of the viewport */
+    width: 100%; /* Cover the entire width of the viewport */
+    height: 100%; /* Cover the entire height of the viewport */
+    background-color: var(--primary-color); /* Adjust the background color as needed */
+    opacity: 1;
+    z-index: 100;
+    overflow-y: auto; /* Enable vertical scrolling if the menu content exceeds viewport height */
+    transition: opacity 2s; /* Smooth transition for opacity */
+}
+.menu-hidden {
+    opacity: 0; /* Initially set opacity to 0 */
+    height: 0; /* Initially set height to 0 */
+    width: 0; /* Initially set width to 0 */
+}
+.view-flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between !important;
+    border-bottom: 1px solid #f4f4f4;
+    color: white;
+    cursor: pointer;
+}
+.menu-hidden.active {
+    opacity: 1; /* Set opacity to 1 when active */
+    height: auto; /* Set height to auto to expand */
+    width: auto; /* Set width to auto to expand */
+    transition: opacity 2s, height 2s, width 2s; /* Smooth transition for opacity, height, and width */
 
 }
+.rotate{
+    transform: rotate(180deg);
+    transition: 2s;
+}
+
+
+/* job card */
+
 .jobs-container{
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -119,7 +202,8 @@ option{
     cursor: pointer;
 }
 #reset-btn:hover{
-    background: rgb(112, 74, 3);
+    background: var(--secondary-color);
+    color: var(--primary-color)
 }
 
 
