@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
-
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
     <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
 
     <title>Job Portal - Home</title>
@@ -76,7 +76,7 @@
     <img src="/images/phone-pic.JPG" class="hidden-right" alt="">
     </div>
 
-    <i class="fa-solid fa-caret-up back-to-top hidden-left"></i>
+    <i class="fa-solid fa-caret-up back-to-top hidden-left" id="to-top"></i>
 
 
 
@@ -196,6 +196,33 @@
         </div>
     </div>
 </div>
+
+
+<div class="salary-container">
+    <div class="text-title">Salary Calculator <i class="fa-solid fa-circle-info" id="salary-i-info"></i></div>
+    <p class="salary-text">Wondering what salary you should be looking for? Try our new salary calculator now!</p>
+
+    <div class="salary-input">
+        <select name="job-titles" id="job-titles"></select>
+    </div>
+    <button class="salary-btn">Get Salaries!</button>
+
+    <div class="salary-results">
+        <div class="min-salary"></div>
+        <div class="median-salary"></div>
+        <div class="max-salary"></div>
+    </div>
+    <div class="salary-info-title title hidden-up"></div>
+    <div class="salary-info hidden-up"></div>
+</div>
+
+
+
+
+
+
+
+
 
 
 <div class="reviews-container">
@@ -440,11 +467,15 @@
 </footer>
 
 
+<script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
+
     <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
     <script type="text/javascript">window.onload = function() { Calendly.initBadgeWidget({ url: 'https://calendly.com/patrickbell1302/30min?primary_color=262F4C', text: 'Book Meeting', color: '#262F4C', textColor: '#ffffff', branding: undefined }); }</script>
 <!-- Calendly badge widget end -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="home.js"></script>
+    <script src="salary.js"></script>
 </body>
 </html>

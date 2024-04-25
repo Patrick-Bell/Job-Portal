@@ -11,6 +11,7 @@ const ReferralModel = require('./models/referral')
 const ContactMessageModel = require('./models/message')
 const { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail, sendAppliacntEmail } = require('./email')
 const cron = require('node-cron')
+const axios = require('axios')
 
 
 
@@ -41,6 +42,7 @@ app.get('/apply', (req, res) => {
     const filePath = path.join(__dirname, 'public', 'application.html');
     res.sendFile(filePath);
 });
+
 
 
 // Get job details by ID
