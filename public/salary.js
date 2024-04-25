@@ -19,6 +19,7 @@ const techSalaryData = [
     { jobTitle: 'Business Intelligence Analyst', minSalary: 80000, medianSalary: 105000, maxSalary: 130000 },
     { jobTitle: 'Technical Support Specialist', minSalary: 55000, medianSalary: 75000, maxSalary: 95000 },
     { jobTitle: 'Data Engineer', minSalary: 75000, medianSalary: 100000, maxSalary: 125000 },
+    { jobTitle: 'Junior Software Engineer', minSalary: 30000, medianSalary: 35000, maxSalary: 40000 },
     { jobTitle: 'Ruby Developer', minSalary: 70000, medianSalary: 95000, maxSalary: 120000 },
     { jobTitle: 'Node.js Developer', minSalary: 80000, medianSalary: 105000, maxSalary: 130000 },
     { jobTitle: 'JavaScript Developer', minSalary: 75000, medianSalary: 100000, maxSalary: 125000 },
@@ -74,8 +75,6 @@ searchSalaryBtn.addEventListener('click', () => {
         medianSalary.textContent = `£${selectedJobData.medianSalary.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
         maxSalary.textContent = `£${selectedJobData.maxSalary.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`;
 
-        console.log(selectedJobData.minSalary, selectedJobData.medianSalary, selectedJobData.maxSalary);
-
         salaryInfoTitle.innerHTML =`${selectedJob} salary in the UK<br><br>`
         salaryInfo.innerHTML = `${selectedJob}'s usually earn a salary of <strong>${medianSalary.textContent}</strong>. Most of the ${selectedJob} salaries are between <strong>${minSalary.textContent} GPB</strong> and
         <strong>${maxSalary.textContent} GPB per year</strong>.<br><br>
@@ -89,7 +88,7 @@ searchSalaryBtn.addEventListener('click', () => {
 
 
 tippy('#salary-i-info', {
-    content: "Salary information may not be 100% accurate but is a solid foundation for tech salaries in the UK. All positions are based on <strong>Senior</strong> positions",
+    content: "Salary information may not be 100% accurate but is a solid foundation for tech salaries in the UK. All positions are based on <strong>Senior</strong> positions unless stated in the job title",
     allowHTML: true,
     theme: 'tomato',
 });
