@@ -13,6 +13,7 @@
 }
 
 
+/* back to top button */
 .fa-caret-up {
     position: fixed;
     font-size: 2rem;
@@ -147,6 +148,8 @@ ul{
     padding: 20px;
 }
 
+
+
 /* stat section */
 .stat-container{
     width: 75%;
@@ -211,6 +214,9 @@ ul{
     padding: 10px 12px;
     margin-top: 5px;
 }
+
+
+
 
 /* refer friend section */
 .referral-container{
@@ -288,8 +294,9 @@ h6{
 }
 
 
-/* first part of website */
 
+
+/* first part of website */
 .front-container {
     width: 100%;
     overflow: hidden;
@@ -352,8 +359,9 @@ button{
 }
 
 
-/* carasel */
 
+
+/* carasel */
 .wrapper{
     display: flexbox;
     align-items: center;
@@ -390,6 +398,7 @@ button{
         transform: translateX(calc(-250px * 5));
     }
 }
+
 
 
 
@@ -444,8 +453,6 @@ button{
       &::before{
         content: 'Send Message';
     }
-
-
 }
 .effect1{
     border-radius: 50%;
@@ -455,7 +462,6 @@ button{
     animation: rotate 1s linear infinite;
     font-size: 0;
 }
-
 @keyframes rotate{
     0%{
         transform: rotate(0deg);
@@ -514,6 +520,7 @@ button{
 }
 
 
+
 /* animations */
 .hidden-left{
     opacity: 0;
@@ -538,6 +545,7 @@ button{
     filter: blur(0);
     transform: translateX(0);
 }
+
 
 
 /* reviews section */
@@ -659,10 +667,11 @@ footer{
     text-align: center;
 }
 
+
+
 /* event container */
 .event-container {
-    position: relative; /* Ensure proper positioning for pseudo-element */
-    /* background-image: url('/images/event.JPG'); */
+    position: relative;
     background: var(--primary-color);
     padding: 30px;
     height: 40vh;
@@ -864,7 +873,7 @@ option{
 
 
 
-
+/* responsiveness queries*/
 @media screen and (max-width: 400px) {
     .box-top{
         flex-wrap: wrap;
