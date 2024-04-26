@@ -87,6 +87,12 @@ ul{
     opacity: 0; /* Initially set opacity to 0 */
     height: 0; /* Initially set height to 0 */
     width: 0; /* Initially set width to 0 */
+    overflow: hidden;
+}
+.menu-hidden ul a{
+    list-style: none;
+    text-decoration: none;
+    color: white;
 }
 .view-flex{
     display: flex;

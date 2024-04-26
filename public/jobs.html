@@ -17,14 +17,26 @@
     </div>
     
     <div class="menu-bar">
+
+        <div class="flex-menu">
+        <img src="/images/menu-icon.png" class="hidden-right" alt="">
+        <i class="fa-solid fa-x"></i>
+    </div>
+        
         
         <div class="view-flex">
             <li class="view">Home</li>
             <i class="fa-solid fa-arrow-down"></i>
             </div>
             <div class="menu-hidden">
-            <ul><a class="scroll-click" href="#journey-scroll">Our journey</a></ul>
-            <ul><a class="scroll-click" href="#referral-scroll">Referrals scrolls</a></ul>
+            <ul><a class="scroll-click" href="/admin.html#journey-scroll">Our journey</a></ul>
+            <ul><a class="scroll-click" href="/admin.html#salary-calculator">Salary Calculator</a></ul>
+            <ul><a class="scroll-click" href="/admin.html#contact">Contact Us</a></ul>
+            <ul><a class="scroll-click" href="#accordian">Frequently Asked Questions</a></ul>
+            <ul><a class="scroll-click" href="#admin-login">Admin Login</a></ul>
+
+
+
             </div>
 
 
@@ -35,6 +47,8 @@
         <div class="menu-hidden">
         <ul>Why work with us</ul>
         <ul>Who works with us</ul>
+        <ul>View all clients</ul>
+        <ul><a href="https://calendly.com/patrickbell1302/30min?primary_color=262F4C" target="_blank">Book a meeting</a></ul>
         </div>
     
     
@@ -44,11 +58,12 @@
             <i class="fa-solid fa-arrow-down"></i>
             </div>
             <div class="menu-hidden">
-            <ul>Search Open Vacancies</ul>
-            <ul>Why work through us</ul>
-            <ul>Referal Scheme</ul>
+            <ul><a class="scroll-click" href="/jobs.html">Search Jobs</a></ul>
+            <ul><a class="scroll-click" href="#referral-scroll">Refer a Friend</a></ul>
             </div>
     </div>
+
+
 
     <div class="filter-container">
         <h1>Filters</h1>
@@ -76,6 +91,106 @@
     </div>
 
     <div id="pagination-container"></div>
+
+
+
+
+    <footer>
+        <img src="/images/footer-img.png" alt="">
+        <div class="footer-grid">
+            <div class="footer-header hidden-left">Clients
+                <ul>
+                    <li><a href="">Who we are</a></li>
+                    <li><a href="">What we do</a></li>
+                    <li><a href="">What our clients say</a></li>
+                    <li><a href="https://calendly.com/patrickbell1302/30min?primary_color=262F4C" target="_blank">Book a meeting</a></li>
+                </ul>
+            </div>
+            <div class="footer-header hidden-left">Candidates
+                <ul>
+                    <li><a href="">Search Jobs</a></li>
+                    <li><a href="">Referrals</a></li>
+                    <li><a href="">Upload CV</a></li>
+                </ul>
+            </div>
+    
+            <div class="footer-header hidden-left">Information
+                <ul>
+                    <li><a href="">FAQs</a></li>
+                    <li><a href="">Get in touch</a></li>
+                    <li><a href="">Locations</a></li>
+                </ul>
+            </div>
+            <div class="footer-header hidden-left">Socials
+                <ul>
+                    <li><a href="">Facebook</a></li>
+                    <li><a href="">Instagram</a></li>
+                    <li><a href="">Twitter</a></li>
+                    <li><a href="">LinkedIn</a></li>
+                </ul>
+            </div>
+            <div class="footer-header hidden-left">Address
+                <ul>
+                    <p>1 Cherry Drive</p>
+                    <p>London</p>
+                    <p>E0 0AA</p>
+                </ul><br>
+                <div class="footer-header hidden-left">Contact
+                    <ul>
+                        <p>techtroop-info@gmail.com</p>
+                    </ul>
+                </div><br>
+                <div class="footer-header hidden-left" id="admin-login">Admin
+                    <ul>
+                        <p><a href="/login">Log in</a></p>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="accordian" id="accordian">
+            <div class="accordian-container hidden-up">
+            <div class="accordian-header">Where can I get updates on my application?
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="accordian-desc">When you first apply for a job, you will recieve a confirmation email for your application. As we experience high volumes of applicants, we cannot
+                gurantee that we will call you straight away. If you ever want to get an update, the best way to get in touch is to contact us via email.
+            </div>
+        </div>
+        <div class="accordian-container hidden-up">
+            <div class="accordian-header">Do you have a referral scheme?
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="accordian-desc">Yes. Our referral scheme is simple! If you refer to us a friend who is then placed within a 12 month period, and completes a minimum of 3 months
+                on any of our client sites, you will be rewarded <strong>£1000</strong> in vouchers (you can choose!). Eligible referrals <strong>MUST</strong> be submitted via our referral form.
+            </div>
+        </div>
+        <div class="accordian-container hidden-up">
+            <div class="accordian-header">What is the best way to get in touch?
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="accordian-desc">The best method to get in touch is email - techtroop-info@gmail.com</div>
+        </div>
+        <div class="accordian-container hidden-up">
+            <div class="accordian-header">When are you expecting to get more vacancies?
+                <i class="fa-solid fa-plus"></i>
+            </div>
+            <div class="accordian-desc">We often bring in new jobs so it is always a good idea to check our website. If there is a particular job you are looking for, it may be worth
+                reaching out as we will be able to tell you if it is something we expect to get coming up. To view all our jobs, click <a href="/jobs.html">here</a>.
+            </div>
+        </div>
+    
+        <button class="faq-btn">All FAQs</button>
+        </div>
+    
+    
+    
+        <div class="line"></div>
+        <p class="footer-text">By clicking on some of the links above, you will leave the website and be directed to a third-party website. The privacy practices of those third parties may differ from 
+            those of Tech Troop. We recommend you review the privacy statements of those third party websites, as Tech Troop is not responsible for those third parties' privacy or security 
+            practices</p>
+        <p class="footer-text">Tech Troop Recruitment Ltd © 2024</p>  
+    </footer>
       
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

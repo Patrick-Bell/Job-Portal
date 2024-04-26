@@ -163,6 +163,7 @@ const fetchAndDisplayMessageTable = async () => {
         });
 
         updateMessagePaginationButtons()
+        updateStatistics()
 
         const messageInfo = document.querySelector('.message-job-page-info')
         messageInfo.innerHTML = `Showing Messages <strong>${startIndex + 1}</strong> - <strong>${endIndex}</strong> | View all <a href="/messages">messages</a>`
@@ -175,28 +176,48 @@ const fetchAndDisplayMessageTable = async () => {
 
 const displayMessage = (message) => {
     const date = message.dateSent;
-    const formattedDate = new Date(date).toLocaleDateString()
-    const messageId = message.id
-    
-    
+    const formattedDate = new Date(date).toLocaleDateString();
+    const messageId = message.id;
+
     const row = messageTable.insertRow();
 
     const cell1 = row.insertCell(0);
-    cell1.innerHTML = `${message.name} - ${message.email}`
+    cell1.innerHTML = `${message.name} - ${message.email}`;
 
     const cell2 = row.insertCell(1);
-    cell2.textContent = formattedDate
+    cell2.textContent = formattedDate;
 
     const cell3 = row.insertCell(2);
     cell3.textContent = message.message;
 
-    const cell4 = row.insertCell(3)
-    cell4.innerHTML = `<div class="action-row"><i class="fa-solid fa-trash"></i><i class="fa-solid fa-check"></i></div>`
-    const checkButton = cell4.querySelector('.fa-check')
+    const cell4 = row.insertCell(3);
+    const actionDiv = document.createElement('div');
+    actionDiv.classList.add('action-row');
+    actionDiv.innerHTML = `<i class="fa-solid fa-trash"></i><i class="fa-solid fa-check"></i>`;
+    cell4.appendChild(actionDiv);
+
+    const trashButton = actionDiv.querySelector('.fa-trash');
+    const checkButton = actionDiv.querySelector('.fa-check');
+
+    // Add event listener for the check button
     checkButton.addEventListener("click", () => {
-        respondedJob(row, messageId)
-    })
-}
+        respondedJob(row, messageId);
+    });
+
+    // Initialize Tippy tooltips for trash and check buttons
+    tippy(trashButton, {
+        content: "Click to <strong>delete</strong> message. This <strong>CANNOT</strong> be undone.",
+        theme: 'delete', // Add your custom tooltip theme class
+        allowHTML: true,
+    });
+
+    tippy(checkButton, {
+        content: "Click to <strong>save</strong> message. This will remove the message from this table.",
+        theme: 'save', // Add your custom tooltip theme class
+        allowHTML: true,
+    });
+};
+
 
 
 const updateMessagePaginationButtons = () => {
@@ -274,6 +295,7 @@ const fetchAndDisplayReferralTable = async () => {
         });
 
         updateReferralPaginationButtons()
+        updateStatistics()
 
         const referralInfo = document.querySelector('.referral-job-page-info')
         referralInfo.innerHTML = `Showing Referrals <strong>${startIndex + 1}</strong> - <strong>${endIndex}</strong>`
@@ -426,6 +448,7 @@ const fetchAndDisplayJobsTable = async () => {
 
         // Update pagination buttons
         updatePaginationButtons();
+        updateStatistics()
 
         // Update job page info
         const jobPageInfo = document.querySelector('.job-page-info');
@@ -552,6 +575,17 @@ const displayJob = (job) => {
     editButton.addEventListener("click", () => {
         editJob(row, job.jobId)
     })
+    tippy(deleteButton, {
+        content: "Click to <strong>delete</strong> job. This <strong>CANNOT</strong> be undone.",
+        theme: 'delete', // Add your custom tooltip theme class
+        allowHTML: true,
+    });
+
+    tippy(editButton, {
+        content: "Click to <strong>edit</strong> job.",
+        theme: 'edit', // Add your custom tooltip theme class
+        allowHTML: true,
+    });
 }
 
 const editJob = async (row, jobId, formattedDate, numOfApps) => {
@@ -666,6 +700,9 @@ const deleteJob = async (row, jobId) => {
     try {
         const response = await axios.delete(`/api/joblist/${jobId}`);
         console.log('Job deleted successfully:', response.data);
+
+        fetchAndDisplayJobsTable()
+        updateStatistics()
 
         // Remove the row from the table after successful deletion
         row.remove();
@@ -794,7 +831,6 @@ function setUpMenuListeners() {
 }
 
 
-
 const menu = document.querySelector('.menu');
 const menuContent = document.querySelector('.menu-bar');
 
@@ -806,6 +842,29 @@ window.addEventListener('load', () => {
     const loader = document.querySelector('.loader')
     loader.classList.add('loader--hidden')
 })
+
+
+
+
+const initializeTooltips = () => {
+    const trashIcons = document.querySelectorAll('.fa-trash');
+
+    trashIcons.forEach(icon => {
+        try {
+            tippy(icon, {
+                content: "Click to delete. This <strong>CANNOT</strong> be undone",
+                allowHTML: true,
+                theme: 'delete',
+            });
+        } catch (error) {
+            console.error('Tooltip initialization error:', error);
+        }
+    });
+};
+
+
+initializeTooltips()
+
 
 setUpMenuListeners()
 

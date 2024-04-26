@@ -155,6 +155,12 @@ submitApplicationBtn.addEventListener("click", (event) => {
 });
 
 
+const backBtn = document.querySelector('.fa-arrow-left');
+backBtn.addEventListener('click', () => {
+    window.location = 'jobs.html'
+})
+
+
 
 window.addEventListener('DOMContentLoaded', () => {
     fetchJobDetails(jobId);

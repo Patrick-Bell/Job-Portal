@@ -5,6 +5,76 @@ let allJobs = []; // Define allJobs outside the function
 let jobs = []
 const paginationContainer = document.getElementById('pagination-container')
 
+
+
+const accordianHeader = document.querySelectorAll('.accordian-header');
+const accordianDesc = document.querySelectorAll('.accordian-desc');
+const plusIcon = document.querySelectorAll('.fa-plus')
+
+function accordionMenu() {
+  accordianHeader.forEach((accordion, index) => {
+      accordion.addEventListener("click", () => {
+          // Toggle active class for accordion description
+          accordianDesc[index].classList.toggle('active');
+          
+          plusIcon[index].classList.toggle('fa-minus');
+          
+          // Add back fa-plus class when accordion is collapsed
+          if (accordianDesc[index].classList.contains('active')) {
+              plusIcon[index].classList.remove('fa-plus')
+              plusIcon[index].classList.add('fa-minus');
+          } else {
+              plusIcon[index].classList.add('fa-plus')
+              plusIcon[index].classList.remove('fa-minus');
+          }
+      });
+  });
+}
+
+
+accordionMenu()
+
+
+
+const scrolls = document.querySelectorAll('.scroll-click');
+const menuContent = document.querySelector('.menu-bar');
+const viewMenu = document.querySelectorAll('.view-flex');
+const subMenu = document.querySelectorAll('.menu-hidden');
+const arrowIcons = document.querySelectorAll('.fa-arrow-down');
+const menu = document.querySelector('.menu');
+const closeMenu = document.querySelector('.fa-x')
+
+
+ // Set up event listener for menu toggle
+ menu.addEventListener("click", () => {
+  menuContent.classList.toggle('active');
+  console.log('clicking menu icon')
+});
+
+
+function setUpMenuListeners() {
+  viewMenu.forEach((view, index) => {
+      view.addEventListener("click", () => {
+          subMenu[index].classList.toggle('active');
+          arrowIcons[index].classList.toggle('rotate');
+      })
+  })
+}
+
+// Set up event listener for scroll clicks
+scrolls.forEach(scroll => {
+    scroll.addEventListener("click", () => {
+        console.log('clicked');
+        menuContent.classList.toggle('active');
+    });
+});
+
+
+closeMenu.addEventListener("click", () => {
+  menuContent.classList.toggle('active')
+})
+
+
 async function renderAllJobs(jobs) {
     try {
         // Clear the container before rendering
@@ -147,3 +217,4 @@ window.addEventListener('load', () => {
 
 
 fetchAndRenderAllJobs()
+setUpMenuListeners()

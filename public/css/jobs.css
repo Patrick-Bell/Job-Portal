@@ -9,19 +9,12 @@
     --primary-color: #262F4C;
     --secondary-color: #E2EFF7;
     --light-background: E7E7E9;
-}
-body{
-    background: url('/images/background.jpg');
-    background-position: center;
-    background-size: contain;
-    z-index: -1;
-    backdrop-filter: blur(5px); /* Apply blur effect */
-}
-
+}   
 /* navbar */
 
 /* navbar */
 .navbar{
+    width: 100% !important;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -60,10 +53,11 @@ ul{
     right: 0%;
     padding: 10px;
     opacity: 0;
+    min-height: 100%;
 }
 .menu-bar.active {
     position: fixed; /* Fixed position so it remains in place even when scrolling */
-    top: 23.5%; /* Position at the top of the viewport */
+    top: 0; /* Position at the top of the viewport */
     left: 0; /* Position at the left edge of the viewport */
     width: 100%; /* Cover the entire width of the viewport */
     height: 100%; /* Cover the entire height of the viewport */
@@ -77,6 +71,12 @@ ul{
     opacity: 0; /* Initially set opacity to 0 */
     height: 0; /* Initially set height to 0 */
     width: 0; /* Initially set width to 0 */
+    overflow: hidden;
+}
+.menu-hidden ul a{
+    list-style: none;
+    text-decoration: none;
+    color: white;
 }
 .view-flex{
     display: flex;
@@ -91,7 +91,22 @@ ul{
     height: auto; /* Set height to auto to expand */
     width: auto; /* Set width to auto to expand */
     transition: opacity 2s, height 2s, width 2s; /* Smooth transition for opacity, height, and width */
-
+}
+.flex-menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.fa-x{
+    margin: 0 20px;
+    background: white;
+    color: var(--primary-color);
+    padding: 15px;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+.fa-x:hover{
+    opacity: 0.7;
 }
 .rotate{
     transform: rotate(180deg);
@@ -101,13 +116,14 @@ ul{
 
 /* job card */
 
-.jobs-container{
+.jobs-container {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 0.5rem;
     margin: auto auto;
     z-index: 1;
 }
+
 .job-card{
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
     margin: 20px;
@@ -241,6 +257,94 @@ option{
 
 
 
+/* footer */
+footer{
+    background: var(--secondary-color);
+}
+.footer-grid{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    place-content: center;
+    width: 90%;
+    margin: 0 40px;
+}
+.footer-header{
+    color: var(--primary-color);
+    font-weight: 800;
+}
+.footer-header a, .footer-header ul{
+    list-style: none;
+    text-decoration: none;
+    color: black;
+}
+.footer-header li{
+    padding: 10px 0;
+}
+.footer-header li:hover{
+    transform: translateX(-5px);
+    transition: .2s;
+}
+.footer-header p{
+    color: black;
+    width: 100%;
+}
+.line{
+    width: 90%;
+    border-top: 3px solid var(--primary-color);
+    margin: auto auto;
+}
+.footer-text{
+    margin: 0 40px;
+    padding: 10px;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+
+/* faq footer */
+.accordian-container{
+    width: 75%;
+    margin: 5px auto 5px auto;
+    font-size: 0.75rem;
+}
+.fa-plus.hide{
+    display: none;
+}
+.accordian-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--primary-color);
+    color: white;
+    padding: 8px;
+    margin: 5px 0 0 0;
+    border-radius: 0.4rem 0.4rem 0 0;
+    cursor: pointer;
+}
+.accordian-desc{
+    background: var(--light-background);
+    padding: 8px;
+    border-radius: 0 0 0.4rem 0.4rem;
+    display: none;
+}
+.accordian-desc.active{
+    display: block;
+}
+.faq-btn{
+    outline: none;
+    border: none;
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    padding: 12px 15px;
+    margin: 10px auto auto;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 
 
 @media screen and (max-width: 1170px) {
@@ -255,4 +359,9 @@ option{
         grid-template-columns: repeat(1, 1fr);
         grid-gap: 0.5rem;
     }
+    .footer-grid{
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
+
+

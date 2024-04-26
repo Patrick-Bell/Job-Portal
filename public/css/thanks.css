@@ -49,3 +49,17 @@ h1 {
     color: white;
     letter-spacing: 1px;
 }
+
+
+.button-container{
+    margin-top: 20px;
+}
+button{
+    outline: none;
+    border: none;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    padding: 10px 12px;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
