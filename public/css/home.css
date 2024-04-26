@@ -914,9 +914,6 @@ option{
     .footer-grid{
         grid-template-columns: repeat(2, 1fr);
     }
-    .menu-bar.active{
-        top: 150px;
-    }
 }
 @media screen and (max-width: 1060px) {
     .testimonial-box{
