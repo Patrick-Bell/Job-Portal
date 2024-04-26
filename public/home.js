@@ -43,6 +43,7 @@ const swiper = new Swiper('.swiper', {
   const subMenu = document.querySelectorAll('.menu-hidden');
   const arrowIcons = document.querySelectorAll('.fa-arrow-down');
   const menu = document.querySelector('.menu');
+  const closeMenu = document.querySelector('.fa-x')
   
   // Set up event listeners for menu items
 
@@ -70,6 +71,10 @@ const swiper = new Swiper('.swiper', {
       });
   });
   
+
+  closeMenu.addEventListener("click", () => {
+    menuContent.classList.toggle('active')
+  })
 
 
 

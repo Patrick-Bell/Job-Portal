@@ -73,7 +73,7 @@ ul{
 }
 .menu-bar.active {
     position: fixed; /* Fixed position so it remains in place even when scrolling */
-    top: 23.5%; /* Position at the top of the viewport */
+    top: 0; /* Position at the top of the viewport */
     left: 0; /* Position at the left edge of the viewport */
     width: 100%; /* Cover the entire width of the viewport */
     height: 100%; /* Cover the entire height of the viewport */
@@ -101,7 +101,22 @@ ul{
     height: auto; /* Set height to auto to expand */
     width: auto; /* Set width to auto to expand */
     transition: opacity 2s, height 2s, width 2s; /* Smooth transition for opacity, height, and width */
-
+}
+.flex-menu{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.fa-x{
+    margin: 0 20px;
+    background: white;
+    color: var(--primary-color);
+    padding: 15px;
+    border-radius: 0.4rem;
+    cursor: pointer;
+}
+.fa-x:hover{
+    opacity: 0.7;
 }
 .rotate{
     transform: rotate(180deg);
@@ -789,7 +804,7 @@ option{
     margin: 5px;
     transition: all 0.5s;
     animation: width-min linear 3s;
-    width: 33%;
+    width: 40%;
     overflow: hidden;
     border-radius: 0.4rem;
 }
@@ -829,7 +844,7 @@ option{
       filter: blur(5px);
     }
     100% {
-      width: 33%;
+      width: 40%;
       filter: blur(0); /* End with a width of 100% */
     }
   }
