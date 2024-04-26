@@ -191,18 +191,17 @@ const displayMessage = (message) => {
     cell3.textContent = message.message;
 
     const cell4 = row.insertCell(3);
-    const actionDiv = document.createElement('div');
-    actionDiv.classList.add('action-row');
-    actionDiv.innerHTML = `<i class="fa-solid fa-trash"></i><i class="fa-solid fa-check"></i>`;
-    cell4.appendChild(actionDiv);
-
-    const trashButton = actionDiv.querySelector('.fa-trash');
-    const checkButton = actionDiv.querySelector('.fa-check');
+    cell4.innerHTML = `<div class="action-row"><i class="fa-solid fa-trash"></i><i class="fa-solid fa-check"></i></div>`
+    const trashButton = cell4.querySelector('.fa-trash')
+    const checkButton = cell4.querySelector('.fa-check')
 
     // Add event listener for the check button
     checkButton.addEventListener("click", () => {
         respondedJob(row, messageId);
     });
+    trashButton.addEventListener('click', () => {
+        deleteMessage(row, messageId)
+    })
 
     // Initialize Tippy tooltips for trash and check buttons
     tippy(trashButton, {
@@ -217,6 +216,21 @@ const displayMessage = (message) => {
         allowHTML: true,
     });
 };
+
+const deleteMessage = async (row, messageId) => {
+    try{
+        const response = await axios.delete(`/api/messages/${messageId}`)
+        console.log('deleted', response.data)
+        row.remove()
+
+        updateMessagePaginationButtons()
+        fetchAndDisplayMessageTable()
+        updateStatistics()
+
+    }catch(error){
+        console.log(error)
+    }
+}
 
 
 
@@ -332,6 +346,12 @@ const displayReferral = (referral) => {
     deleteBtn.addEventListener("click", () => {
         deleteReferral(referralId, row)
     })
+
+    tippy(deleteBtn, {
+        content: "Click to <strong>delete</strong> message. This <strong>CANNOT</strong> be undone.",
+        theme: 'delete', // Add your custom tooltip theme class
+        allowHTML: true,
+    });
 }
 
 
@@ -843,27 +863,6 @@ window.addEventListener('load', () => {
     loader.classList.add('loader--hidden')
 })
 
-
-
-
-const initializeTooltips = () => {
-    const trashIcons = document.querySelectorAll('.fa-trash');
-
-    trashIcons.forEach(icon => {
-        try {
-            tippy(icon, {
-                content: "Click to delete. This <strong>CANNOT</strong> be undone",
-                allowHTML: true,
-                theme: 'delete',
-            });
-        } catch (error) {
-            console.error('Tooltip initialization error:', error);
-        }
-    });
-};
-
-
-initializeTooltips()
 
 
 setUpMenuListeners()

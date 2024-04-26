@@ -2,6 +2,7 @@ const JobListModel = require('./models/job-list')
 const referralModel = require('./models/referral')
 const ReferralModel = require('./models/referral')
 const MessageModel = require('./models/message')
+const EventModel = require('./models/event')
 const nodemailer = require('nodemailer')
 
 // add a new message email - coming soon...
@@ -269,5 +270,47 @@ const dailyJobUpdate = async () => {
         console.log(error)
     }
 }
+
+
+const sendAllEventSubsribers = async () => {
+    try {
+        const formattedDate = new Date().toLocaleDateString(); // Get current date
+
+        const emailContent = `
+            Hi, as you have registered interest in our upcoming event, this email is to provide some more information on what to expect.
+        `;
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.USER,
+                pass: process.env.PASS,
+            },
+        });
+
+        // Assuming EventModel is your Mongoose model for events
+        const events = await EventModel.find(); // Retrieve all events from the database
+
+        // Loop through each event and send email to the event's subscribers
+        for (const event of events) {
+            // Assuming each event has a list of subscribers stored in an array
+                 transporter.sendMail({
+                    from: process.env.USER,
+                    to: event.email,
+                    subject: `Event Information - ${formattedDate}`,
+                    html: emailContent,
+                });
+
+                console.log(`Email sent successfully to ${event.email}`);
+            
+        }
+
+        console.log('All emails sent successfully');
+    } catch (error) {
+        console.error('Error sending emails:', error);
+    }
+};
+
+
 
 module.exports = { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail, sendAppliacntEmail } 

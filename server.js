@@ -9,6 +9,7 @@ const JobListModel = require('./models/job-list');
 const JobApplicationModel = require('./models/job-application');
 const ReferralModel = require('./models/referral')
 const ContactMessageModel = require('./models/message')
+const EventModel = require('./models/event')
 const { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail, sendAppliacntEmail } = require('./email')
 const cron = require('node-cron')
 const axios = require('axios')
@@ -113,6 +114,24 @@ app.post('/api/referral', async (req, res) => {
 
     } catch(error) {
         console.log(error);
+        res.status(500).json({ error: 'internal error'})
+    }
+})
+
+app.post('/api/events', async (req, res) => {
+    try{
+        const { id, email } = req.body
+
+        const newEvent = new EventModel({
+            id,
+            email,
+        })
+
+        const savedEvent = await newEvent.save()
+        res.status(200).json(savedEvent)
+
+    }catch(error) {
+        console.log(error)
         res.status(500).json({ error: 'internal error'})
     }
 })
@@ -275,6 +294,21 @@ app.delete('/api/joblist/:id', async (req, res) => {
     } catch (error) {
         console.error(error)
         res.status(500).json({ error: 'Error deleting product'})
+    }
+})
+
+app.delete('/api/messages/:id', async (req, res) => {
+    const messageId = req.params.id;
+    try{
+        const result = await ContactMessageModel.deleteOne({ id: messageId })
+        if(result.deletedCount === 0) {
+            return res.status(404).json({ error: 'error' })
+        }
+        return res.status(200).json({ message: 'message deleted successfully' })
+
+    }catch(error){
+        console.error(error)
+        return res.status(500).json({ error: 'internal message error'})
     }
 })
 

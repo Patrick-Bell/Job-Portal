@@ -284,5 +284,44 @@ function removeContactForm() {
 }
 
 
+const registerEventInterestBtn = document.getElementById('event-btn')
+
+registerEventInterestBtn.addEventListener('click', async () => {
+    const eventEmail = document.getElementById('event-email').value
+
+        const event = {
+            id: generateRandomId(),
+            email: eventEmail,
+        }
+
+    try{
+        const res = await axios.post('/api/events', event)
+        if (res.status === 200) {
+            console.log('interest registered', event)
+            console.log('sent', res.data)
+            resetEventForm()
+
+            registerEventInterestBtn.innerHTML = 'Saving to the DB.'
+            registerEventInterestBtn.style.background = 'green'
+
+            setTimeout(() => {
+                registerEventInterestBtn.innerHTML = 'Register interest'
+                registerEventInterestBtn.style.background = '#262F4C'
+            }, 3000);
+
+        } else {
+            console.log('error')
+        }
+    }catch(error){
+        console.error(error)
+        console.log(error)
+    }
+})
+
+function resetEventForm() {
+    document.getElementById('event-email').value = ''
+}
+
+
 
 setUpMenuListeners()
