@@ -10,7 +10,7 @@
 :root{
     --primary-color: #262F4C;
     --secondary-color: #E2EFF7;
-    --light-background: E7E7E9;
+    --light-background: #E7E7E9;
 }
 
 body {
@@ -112,6 +112,10 @@ th{
 tr{
     padding: 10px;
 }
+#jobTable td:hover{
+    background: var(--light-background)
+}    
+
 .hidden {
     display: none;
 }
@@ -437,6 +441,7 @@ ul{
 /* editor */
 .compose-email-container{
     display: none;
+    color: black;
 }
 .compose-email-container input{
     width: 50% !important;
@@ -454,15 +459,16 @@ ul{
     margin-right: 10px; /* Add right margin */
     color: black;
 }
+/* Override Quill Editor Styles */
+.ql-editor {
+    color: black; /* Set text color to black */
+}
 .ql-toolbar button {
     background-color: #f0f0f0;
     border: none;
     padding: 8px 12px;
     margin-right: 5px;
     border-radius: 4px;
-}
-.ql-toolbar button:hover {
-    background-color: #e0e0e0;
 }
 .ql-toolbar button.active {
     background-color: var(--primary-color);
@@ -480,11 +486,11 @@ ul{
 }
 .ql-editor ul,
 .ql-editor ol {
-    color: inherit; /* Inherit color from parent container */
+    color: black; /* Inherit color from parent container */
 }
 
 .ql-editor li {
-    color: #333; /* Set desired font color */
+    color: black; /* Set desired font color */
 }
 .btn-primary{
     margin: 10px;
@@ -492,6 +498,15 @@ ul{
     color: white;
     border: none;
     outline: none;
+}
+
+/* toast boostrap */
+.toast-container{
+    z-index: 1000;
+}
+#deleteToast{
+    background-color: red;
+    color: white;
 }
 
 

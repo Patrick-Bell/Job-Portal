@@ -470,6 +470,7 @@ button{
     margin-top: 10px;
     padding: 10px;
     font-weight: bold;
+    width: 8rem;
     transition: all 0.2s ease;
       &::before{
         content: 'Send Message';
@@ -482,6 +483,7 @@ button{
     border-width: 0.3rem;
     animation: rotate 1s linear infinite;
     font-size: 0;
+    width: fit-content;
 }
 @keyframes rotate{
     0%{
@@ -493,6 +495,7 @@ button{
 }
 .effect2 {
     background: green; /* Change background color to green */
+    width: 8rem;
 }
 .effect2::before{
     content: '\f00c';

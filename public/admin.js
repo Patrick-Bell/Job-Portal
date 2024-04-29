@@ -562,6 +562,8 @@ document.getElementById('message-next-page-btn').addEventListener('click', () =>
 const displayJob = (job) => {
     const numOfApps = job.applicants.length;
     const formattedDate = new Date(job.datePosted).toLocaleDateString();
+    const deleteToastExample = document.getElementById('deleteToast')
+    const deleteToast = bootstrap.Toast.getOrCreateInstance(deleteToastExample)
 
     const row = tableBody.insertRow();
     row.classList.add('job-row'); // Add a class to identify job rows
@@ -592,10 +594,11 @@ const displayJob = (job) => {
     deleteButton.addEventListener("click", () => {
         deleteJob(row, job.jobId);
     });
-    const editButton = cell6.querySelector('.fa-pen-to-square')
+    const editButton = cell6.querySelector('.fa-pen-to-square');
     editButton.addEventListener("click", () => {
-        editJob(row, job.jobId)
-    })
+        editJob(row, job.jobId);
+    });
+
     tippy(deleteButton, {
         content: "Click to <strong>delete</strong> job. This <strong>CANNOT</strong> be undone.",
         theme: 'delete', // Add your custom tooltip theme class
@@ -607,7 +610,8 @@ const displayJob = (job) => {
         theme: 'edit', // Add your custom tooltip theme class
         allowHTML: true,
     });
-}
+};
+
 
 const editJob = async (row, jobId, formattedDate, numOfApps) => {
     try {
@@ -718,10 +722,15 @@ document.getElementById('edit-close-btn').addEventListener("click", () => {
 
 
 const deleteJob = async (row, jobId) => {
+    const tostDelete = document.getElementById('deleteToast');
+    const toastBody = document.querySelector('.toast-body')
+    const deleteToast = bootstrap.Toast.getOrCreateInstance(tostDelete)
+    toastBody.innerHTML = `Job ID: <strong>${jobId}</strong> has been successfully deleted.`
     try {
         const response = await axios.delete(`/api/joblist/${jobId}`);
         console.log('Job deleted successfully:', response.data);
 
+        deleteToast.show()
         fetchAndDisplayJobsTable()
         updateStatistics()
 
@@ -867,6 +876,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const quill = new Quill('#editor', {
         theme: 'snow'
     });
+
+    const editor = document.querySelector('.ql-editor');
+
+    // Modify the text color directly using JavaScript
+    editor.style.color = 'black';
 
     const confirmYesBtn = document.getElementById('confirm-yes');
     const myModalElement = document.getElementById('myModal');
