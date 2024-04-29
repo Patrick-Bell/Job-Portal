@@ -13,6 +13,7 @@ const EventModel = require('./models/event')
 const { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail, sendAppliacntEmail } = require('./email')
 const cron = require('node-cron')
 const axios = require('axios')
+const nodemailer = require('nodemailer')
 
 
 
@@ -135,6 +136,56 @@ app.post('/api/events', async (req, res) => {
         res.status(500).json({ error: 'internal error'})
     }
 })
+
+
+app.post('/send-email', async (req, res) => {
+    const { htmlContent } = req.body;
+
+    try {
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.USER,
+                pass: process.env.PASS
+            }
+        });
+
+        // Retrieve unique email addresses from the database
+        const uniqueEmails = await EventModel.distinct('email');
+        console.log('Unique Emails:', uniqueEmails);
+
+        // Iterate over each unique email address and send an email
+        for (const email of uniqueEmails) {
+            // Customize the email content with Quill editor's HTML content
+            const emailContent = `
+                ${htmlContent}
+                <br><br>
+                Regards,
+                Your Event Team
+            `;
+
+            // Create mailOptions for the current email recipient
+            const mailOptions = {
+                from: process.env.USER,
+                to: email, // Set the recipient's email address
+                subject: 'Quill Editor Content',
+                html: emailContent
+            };
+
+            // Send email to the current recipient
+            await transporter.sendMail(mailOptions);
+
+            console.log(`Email sent successfully to ${email}`);
+        }
+
+        console.log('All emails sent successfully');
+        res.json({ message: 'All emails sent successfully' });
+    } catch (error) {
+        console.error('Error sending email:', error);
+        res.status(500).json({ error: 'Failed to send email' });
+    }
+});
+
 
 app.post('/api/messages', async (req, res) => {
     try{

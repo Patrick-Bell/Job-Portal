@@ -434,6 +434,65 @@ ul{
   }
 
 
+/* editor */
+.compose-email-container{
+    display: none;
+}
+.compose-email-container input{
+    width: 50% !important;
+}
+  #compose-email{
+    margin-left: 10px;
+    margin-right: 10px;
+    width: auto;
+  }
+  #editor, .ql-toolbar {
+    border: 1px solid #ccc;
+    padding: 10px;
+    font-family: Arial, sans-serif;
+    margin-left: 10px; /* Add left margin */
+    margin-right: 10px; /* Add right margin */
+    color: black;
+}
+.ql-toolbar button {
+    background-color: #f0f0f0;
+    border: none;
+    padding: 8px 12px;
+    margin-right: 5px;
+    border-radius: 4px;
+}
+.ql-toolbar button:hover {
+    background-color: #e0e0e0;
+}
+.ql-toolbar button.active {
+    background-color: var(--primary-color);
+}
+.ql-editor {
+    font-size: 14px;
+    color: var(--light-background);
+    line-height: 1.6;
+}
+.ql-editor h1 {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+.ql-editor ul,
+.ql-editor ol {
+    color: inherit; /* Inherit color from parent container */
+}
+
+.ql-editor li {
+    color: #333; /* Set desired font color */
+}
+.btn-primary{
+    margin: 10px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    outline: none;
+}
 
 
 @media screen and (max-width: 670px) {

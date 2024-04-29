@@ -21,6 +21,7 @@ closeModalBtn.addEventListener("click", () => {
     jobModal.close()
 })
 
+
 function checkJobType() {
     if (contractChoice.checked) {
         permContainer.style.display = "none"
@@ -823,15 +824,13 @@ const updateStatistics = async () => {
 updateStatistics();
 
 
-const generateRepotrt = document.getElementById('generate-report-btn')
-generateRepotrt.addEventListener("click", () => {
-    window.location = 'report.html'
+const generateRepotrt = document.querySelectorAll('.generate-report-btn')
+generateRepotrt.forEach(genBtn => {
+    genBtn.addEventListener('click', () => {
+        window.location = 'report.html'
+    })
 })
 
-const toJobPage = document.getElementById('gen-job-page')
-toJobPage.addEventListener("click", () => {
-    window.location = 'jobs.html'
-})
 
 
 // menu navigation
@@ -861,6 +860,96 @@ menu.addEventListener("click", () => {
 window.addEventListener('load', () => {
     const loader = document.querySelector('.loader')
     loader.classList.add('loader--hidden')
+})
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const quill = new Quill('#editor', {
+        theme: 'snow'
+    });
+
+    const confirmYesBtn = document.getElementById('confirm-yes');
+    const myModalElement = document.getElementById('myModal');
+    const myModal = new bootstrap.Modal(myModalElement); // Initialize Bootstrap modal
+
+    const sendEmailBtn = document.getElementById('email-btn');
+
+    // Handle confirmation button click
+    confirmYesBtn.addEventListener('click', async () => {
+        myModal.hide();
+        sendEmailBtn.innerHTML = 'Sending...';
+
+        try {
+            // Retrieve the HTML content from the Quill editor
+            const htmlContent = quill.root.innerHTML;
+
+            // Send the HTML content to the server for processing
+            const response = await fetch('/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ htmlContent })
+            });
+
+            // Parse the server response
+            const data = await response.json();
+            console.log('Server Response:', data);
+
+            // Update the button appearance after sending (e.g., show success status)
+            sendEmailBtn.innerHTML = 'Email Sent <i class="fa-solid fa-check"></i>';
+            sendEmailBtn.style.background = 'green';
+            sendEmailBtn.style.color = 'white';
+
+            // Reset the Quill editor content after sending
+            quill.root.innerHTML = ''; // Clear Quill editor content
+
+            setTimeout(() => {
+                sendEmailBtn.innerHTML = 'Send Email';
+                sendEmailBtn.style.background = '#262F4C';
+                sendEmailBtn.style.color = 'white';
+            }, 3000);
+
+        } catch (error) {
+            console.error('Error sending email:', error);
+            sendEmailBtn.innerHTML = 'Send Email'; // Reset button text on error
+            sendEmailBtn.style.background = '#262F4C';
+            sendEmailBtn.style.color = 'white';
+        }
+    });
+
+    // Handle send email button click to show the confirmation modal
+    sendEmailBtn.addEventListener('click', () => {
+        // Show the confirmation modal
+        myModal.show();
+    });
+
+    // Debugging: Log to check if event listeners are being triggered
+    console.log('Event listeners attached.');
+});
+
+
+
+function resetEmailHTML() {
+    const quill = new Quill('#editor');
+    quill.root.innerHTML = '';
+}
+
+
+const mainPage = document.querySelector('.dashboard-lg-container');
+const emailPage = document.querySelector('.compose-email-container');
+const clickToEmail = document.getElementById('email-page')
+
+clickToEmail.addEventListener('click', () => {
+    emailPage.style.display = 'block'
+    mainPage.style.display = 'none'
+    })
+
+
+const backToDash = document.getElementById('dashboard')
+backToDash.addEventListener('click', () => {
+    mainPage.style.display = 'block'
+    emailPage.style.display = 'none'
 })
 
 
