@@ -871,6 +871,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmYesBtn = document.getElementById('confirm-yes');
     const myModalElement = document.getElementById('myModal');
     const myModal = new bootstrap.Modal(myModalElement); // Initialize Bootstrap modal
+    const toastLiveExample = document.getElementById('liveToast')
+    const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+
+
 
     const sendEmailBtn = document.getElementById('email-btn');
 
@@ -910,6 +914,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 sendEmailBtn.style.color = 'white';
             }, 3000);
 
+            toastBootstrap.show()
+
+
         } catch (error) {
             console.error('Error sending email:', error);
             sendEmailBtn.innerHTML = 'Send Email'; // Reset button text on error
@@ -927,7 +934,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Debugging: Log to check if event listeners are being triggered
     console.log('Event listeners attached.');
 });
-
 
 
 function resetEmailHTML() {
