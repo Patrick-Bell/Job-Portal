@@ -10,10 +10,16 @@ const JobApplicationModel = require('./models/job-application');
 const ReferralModel = require('./models/referral')
 const ContactMessageModel = require('./models/message')
 const EventModel = require('./models/event')
+const User = require('./models/user'); // Importing the User model
 const { dailyJobUpdate, newReferralEmail, newApplicantEmail, newMessageEmail, sendAppliacntEmail } = require('./email')
 const cron = require('node-cron')
-const axios = require('axios')
 const nodemailer = require('nodemailer')
+const registerRouter = require('./register');
+const crypto = require('crypto');
+const passport = require('passport');
+const flash = require('express-flash');
+const session = require('express-session');
+const methodOverride = require('method-override');
 
 
 
@@ -24,6 +30,44 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'))
+app.set('view-engine', 'ejs');
+app.use(express.urlencoded({ extended: false }));
+app.use(flash());
+
+app.use(
+    session({
+      secret: 'sessionSecret',
+      resave: false,
+      saveUninitialized: false,
+    })
+  );
+  
+  app.use(passport.initialize());
+  app.use(passport.session());
+  app.use(methodOverride('_method'));
+
+  const initializePassport = require('./passport-config');
+initializePassport(
+  passport,
+  async (email) => {
+    try {
+      const user = await User.findOne({ email: email });
+      return user;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  },
+  async (id) => {
+    try {
+      const user = await User.findById(id);
+      return user;
+    } catch (error) {
+      console.error(error);
+      return null;
+    }
+  }
+);
 
 
 const uri = process.env.MONGO_URI
@@ -36,8 +80,13 @@ db.once('open', () => {
 
 
 app.get('/', (req, res) => {
-    res.sendFile('/admin.html')
-})
+    res.render('home.ejs'); // Render the home page
+});
+
+app.get('/admin', checkAuthenticated, (req, res) => {
+    res.render('admin.ejs'); // Render the admin dashboard if user is authenticated
+});
+
 
 // Define a route to serve the application form page
 app.get('/apply', (req, res) => {
@@ -45,6 +94,25 @@ app.get('/apply', (req, res) => {
     res.sendFile(filePath);
 });
 
+
+app.post('/login', checkNotAuthenticated, passport.authenticate('local', {
+    successRedirect: '/admin',
+    failureFlash: true,
+  }), (req, res, next) => {
+    // This callback will be called after authentication is successful
+    // You can use req.user here
+    console.log('Authenticated User:', req.user);
+  
+    // Continue with the next middleware
+    next();
+  });
+  
+  
+  app.get('/register', checkNotAuthenticated, (req, res) => {
+    res.render('register.ejs');
+  });
+  
+  app.use('/register', registerRouter);
 
 
 // Get job details by ID
@@ -139,7 +207,7 @@ app.post('/api/events', async (req, res) => {
 
 
 app.post('/send-email', async (req, res) => {
-    const { htmlContent } = req.body;
+    const { htmlContent, subject } = req.body;
 
     try {
         const transporter = nodemailer.createTransport({
@@ -168,7 +236,7 @@ app.post('/send-email', async (req, res) => {
             const mailOptions = {
                 from: process.env.USER,
                 to: email, // Set the recipient's email address
-                subject: 'Quill Editor Content',
+                subject: subject,
                 html: emailContent
             };
 
@@ -403,6 +471,32 @@ app.post('/upload', function(req, res) {
         res.status(200).send('File uploaded!');
     });
 });
+
+app.delete('/logout', checkAuthenticated, (req, res) => {
+    console.log("logging out")
+    // Use a callback function as required by req.logout
+    req.logout(function (err) {
+      if (err) {
+        return next(err);
+      }
+      res.redirect('/');
+    });
+  });
+  
+  function checkAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    res.redirect('/');
+  }
+  
+  function checkNotAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+      return res.redirect('/admin');
+    }
+    next();
+  }
+  
 
 
 const PORT = process.env.PORT || 3000; // Use environment variable for port or default to 3000

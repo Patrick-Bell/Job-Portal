@@ -190,82 +190,6 @@ h4{
 
 
 
-
-
-/* nav bar */
-/* navbar */
-.navbar{
-    width: 100% !important;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: white !important;
-}
-img{
-    width: 100px;
-    height: 100px;
-    margin: 0 30px;
-}
-.menu{
-    margin: 0 30px;
-    background: var(--primary-color);
-    font-size: 2rem;
-    padding: 10px;
-    color: white;
-    border-radius: 0.4rem;
-    cursor: pointer;
-}
-li{
-    font-size: 1rem;
-    padding: 12px 5px;
-    color: white;
-    font-weight: 900;
-}
-ul{
-    font-size: 0.75rem;
-    padding: 5px;
-    color: white;
-}
-.menu-bar{
-    background: var(--primary-color);
-    position: absolute;
-    right: 0%;
-    padding: 10px;
-    opacity: 0;
-}
-.menu-bar.active{
-    width: 50%;
-    height: 84.25vh;  
-    opacity: 1;
-    transition: opacity 2s, height 2s, width 2s; /* Smooth transition for opacity, height, and width */
-    overflow-y: hidden;
-}
-.menu-hidden {
-    opacity: 0; /* Initially set opacity to 0 */
-    height: 0; /* Initially set height to 0 */
-    width: 0; /* Initially set width to 0 */
-    overflow: hidden; /* Hide any overflowing content */
-}
-.view-flex{
-    display: flex;
-    align-items: center;
-    justify-content: space-between !important;
-    border-bottom: 1px solid #f4f4f4;
-    color: white;
-    cursor: pointer;
-}
-.menu-hidden.active {
-    opacity: 1; /* Set opacity to 1 when active */
-    height: auto; /* Set height to auto to expand */
-    width: auto; /* Set width to auto to expand */
-    transition: opacity 2s, height 2s, width 2s; /* Smooth transition for opacity, height, and width */
-
-}
-.rotate{
-    transform: rotate(180deg);
-    transition: 2s;
-}
-
 /* pagination */
 #pagination-container, #referral-pagination-container, #message-pagination-container{
     display: flex;
@@ -333,14 +257,15 @@ ul{
     gap: 0.75rem;
     margin: 5px;
 }
-.header-buttons-container button{
-    padding: 30px;
+.header-buttons-container button, .header-buttons-container form{
+    padding: 20px;
     font-size: 16px;
     border-radius: 0.4rem;
     border: none;
     outline: none;
     background: var(--primary-color);
     color: white;
+    text-align: center;
 }
 
 .header-buttons-container button:hover{
@@ -446,7 +371,7 @@ ul{
 .compose-email-container input{
     width: 50% !important;
 }
-  #compose-email{
+  #compose-email, #subject{
     margin-left: 10px;
     margin-right: 10px;
     width: auto;
@@ -505,7 +430,11 @@ ul{
     z-index: 1000;
 }
 #deleteToast{
-    background-color: red;
+    background: red;
+    color: white;
+}
+#addToast{
+    background: green;
     color: white;
 }
 

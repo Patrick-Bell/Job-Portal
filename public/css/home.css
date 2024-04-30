@@ -234,6 +234,7 @@ ul{
     border-radius: 0.4rem;
     padding: 10px 12px;
     margin-top: 5px;
+    margin: auto auto;
 }
 
 
@@ -312,6 +313,7 @@ h6{
 }
 #refer-text-2{
     text-align: center;
+    font-size: 1rem;
 }
 
 
@@ -340,7 +342,7 @@ h6{
     align-items: center;
     justify-content: center;
 }
-h1{
+.text-container h1{
     font-size: 4rem;
     text-align: center;
     font-weight: 900;
@@ -349,7 +351,11 @@ h1{
     justify-content: center;
     margin: 0 10px;
 }
-h5{
+.inner-text-container{
+    position: relative;
+    margin-left: 30px;
+}
+.text-container h5{
     font-size: 1rem;
     font-weight: 700;
     letter-spacing: 1px;
@@ -370,13 +376,13 @@ button{
     list-style: none;
     color: white;
 }
-.search-all-jobs{
+.text-container .search-all-jobs{
     border: 1px solid white;
     outline: none;
     background: var(--primary-color);
     padding: 12px 15px;
-    margin-top: 10px;
     border-radius: 0.4rem;
+    margin: 10px auto 0 auto;
 }
 
 
@@ -467,14 +473,18 @@ button{
     text-align: center;
     border: .2rem solid white;
     cursor: pointer;
-    margin-top: 10px;
     padding: 10px;
     font-weight: bold;
-    width: 8rem;
+    width: 12rem;
+    margin:  10px auto 0 auto;
     transition: all 0.2s ease;
       &::before{
         content: 'Send Message';
     }
+}
+#message{
+    margin: auto auto;
+    padding: 10px;
 }
 .effect1{
     border-radius: 50%;
@@ -495,7 +505,7 @@ button{
 }
 .effect2 {
     background: green; /* Change background color to green */
-    width: 8rem;
+    width: 12rem;
 }
 .effect2::before{
     content: '\f00c';
@@ -718,8 +728,8 @@ footer{
 }
 .event-btn{
     position: absolute;
-    top: 55%; 
-    right: -60px;
+    top: 50%; 
+    right: -70px;
     transform: translate(-50%, -50%);
     padding: 8px;
     border: none;
@@ -779,6 +789,9 @@ footer{
 .salary-container{
     width: 80%;
     margin: auto auto;
+}
+.salary-input select{
+    width: 100%;
 }
 .salary-text{
     text-align: center;
@@ -896,6 +909,12 @@ option{
 
 
 
+  /* log in box */
+  #loginToast{
+    background: red;
+  }
+
+
 
 /* responsiveness queries*/
 @media screen and (max-width: 400px) {
@@ -908,10 +927,10 @@ option{
     }
 }
 @media screen and (max-width: 650px) {
-    h1{
+    .text-container h1{
         font-size: 2.5rem;
     }
-    h5{
+    .text-container h5{
         font-size: 0.75rem;
         width: 80%;
         text-align: center;
@@ -943,6 +962,9 @@ option{
     .front-container{
         grid-template-columns: repeat(1, 1fr);
         height: auto;
+    }
+    .inner-text-container{
+        margin-left: 0px;
     }
     .front-container img{
         height: 250px;

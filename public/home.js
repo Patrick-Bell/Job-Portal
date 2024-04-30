@@ -207,7 +207,7 @@ const submitMessageBtn = document.querySelector('.send-message-btn');
 
 function checkValidation() {
     const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
+    const email = document.getElementById('contact-email').value;
     const message = document.getElementById('message').value;
 
     if (name.length > 1 && message.length > 10 && email.length > 5) {
@@ -225,7 +225,7 @@ checkValidation();
 
 submitMessageBtn.addEventListener("click", async () => {
     const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
+    const email = document.getElementById('contact-email').value;
     const message = document.getElementById('message').value;
 
     // Check if any of the form fields are empty
@@ -279,7 +279,7 @@ submitMessageBtn.addEventListener("click", async () => {
 
 function removeContactForm() {
     document.getElementById('name').value = '';
-    document.getElementById('email').value = '';
+    document.getElementById('contact-email').value = '';
     document.getElementById('message').value = '';
 }
 
@@ -321,6 +321,71 @@ registerEventInterestBtn.addEventListener('click', async () => {
 function resetEventForm() {
     document.getElementById('event-email').value = ''
 }
+
+
+const loginModal = document.getElementById('staticBackdrop');
+const toLogin = new bootstrap.Modal(loginModal);
+const loginScroll = document.getElementById('login-scroll');
+
+loginScroll.addEventListener('click', () => {
+    toLogin.show()
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const loginForm = document.getElementById('loginForm');
+    const toastLiveExample = document.getElementById('loginToast');
+    const toastBootstrap = new bootstrap.Toast(toastLiveExample); // Initialize Bootstrap toast
+
+    loginForm.addEventListener('submit', async (event) => {
+        event.preventDefault(); // Prevent default form submission behavior
+
+        const formData = new FormData(loginForm);
+        const email = formData.get('email');
+        const password = formData.get('password');
+
+        try {
+            const response = await fetch('/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            if (!response.ok) {
+                throw new Error('Login failed'); // Throw an error if login is unsuccessful
+            }
+
+            // Login successful logic (redirect, display success message, etc.)
+            window.location.href = '/admin'; // Redirect to home page upon successful login
+        } catch (error) {
+            console.error('Login Error:', error);
+            toastLiveExample.querySelector('.toast-body').textContent = 'Your credentials are incorrect. Please try again.'; // Update toast message
+            toastBootstrap.show(); // Display the toast notification
+
+            // Clear the form inputs (optional)
+            loginForm.reset();
+        } finally {
+            // Close the login modal
+            const modalInstance = bootstrap.Modal.getInstance(document.getElementById('staticBackdrop'));
+            modalInstance.hide();
+        }
+    });
+});
 
 
 

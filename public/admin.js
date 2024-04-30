@@ -90,9 +90,15 @@ submitJobBtn.addEventListener("click", async () => {
     }
     console.log(jobListing)
 
+    const toastAdd = document.getElementById('addToast');
+    const toastBody = document.querySelector('.add-body')
+    const addToast = bootstrap.Toast.getOrCreateInstance(toastAdd)
+
     try {
         const res = await axios.post('/api/joblist', jobListing)
         if (res.status === 200) {
+            toastBody.innerHTML = `Job ID: <strong>${jobListing.jobId} (${jobListing.jobTitle})</strong> has been successfully added.`
+            addToast.show()
             resetForm()
             fetchAndDisplayJobsTable()
             console.log('job saved success', jobListing)
@@ -844,28 +850,6 @@ generateRepotrt.forEach(genBtn => {
 
 // menu navigation
 
-
-function setUpMenuListeners() {
-    const viewMenu = document.querySelectorAll('.view-flex');
-    const subMenu = document.querySelectorAll('.menu-hidden');
-    const arrowIcons = document.querySelectorAll('.fa-arrow-down')
-
-    viewMenu.forEach((view, index) => {
-        view.addEventListener("click", () => {
-            subMenu[index].classList.toggle('active');
-            arrowIcons[index].classList.toggle('rotate');
-        })
-    })
-}
-
-
-const menu = document.querySelector('.menu');
-const menuContent = document.querySelector('.menu-bar');
-
-menu.addEventListener("click", () => {
-    menuContent.classList.toggle('active')
-})
-
 window.addEventListener('load', () => {
     const loader = document.querySelector('.loader')
     loader.classList.add('loader--hidden')
@@ -887,6 +871,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const myModal = new bootstrap.Modal(myModalElement); // Initialize Bootstrap modal
     const toastLiveExample = document.getElementById('liveToast')
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(toastLiveExample)
+    const subjectText = document.getElementById('subject')
 
 
 
@@ -900,6 +885,8 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             // Retrieve the HTML content from the Quill editor
             const htmlContent = quill.root.innerHTML;
+            const subject = subjectText.value
+            
 
             // Send the HTML content to the server for processing
             const response = await fetch('/send-email', {
@@ -907,7 +894,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ htmlContent })
+                body: JSON.stringify({ htmlContent, subject })
             });
 
             // Parse the server response
@@ -953,6 +940,7 @@ document.addEventListener('DOMContentLoaded', () => {
 function resetEmailHTML() {
     const quill = new Quill('#editor');
     quill.root.innerHTML = '';
+    subjectText.innerHTML = ''
 }
 
 
@@ -973,7 +961,5 @@ backToDash.addEventListener('click', () => {
 })
 
 
-
-setUpMenuListeners()
 
 
