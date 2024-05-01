@@ -15,9 +15,69 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #f4f4f4;
+    background-color: var(--secondary-color);
     height: 100vh;
 }
+
+/* navbar */
+.navbar{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+img{
+    width: 75px;
+    height: 75px;
+    margin: 0 20px;
+    background: var(--secondary-color);
+}
+.profile{
+    border-radius: 50%;
+    margin: 0 40px;
+    font-size: 2.5rem;
+}
+
+.dropdown-menu {
+    display: none;
+    background-color: #f9f9f9;
+    min-width: 220px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    position: absolute;
+    right: 20px;
+}
+
+.dropdown-menu li {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+    background-color: #f1f1f1;
+}
+.dropdown-menu a{
+    text-decoration: none;
+    list-style: none;
+    color: black;
+}
+.dropdown-menu li p{
+    position: absolute;
+    right: 10px;
+    top: 39.75%;
+    background: var(--primary-color);
+    color: white;
+    padding: 5px;
+    border-radius: 50%;
+}
+.dropdown-menu li button{
+    border: none;
+    outline: none;
+    background: #f9f9f9;
+}
+
+
 
 dialog {
     border: 2px solid var(--primary-color);
@@ -91,6 +151,9 @@ input[type="submit"]:hover {
 
 
 /* table */
+thead{
+    text-align: center;
+}
 table, #referral-table{
     width: calc(100% - 5px);
     border-radius: 25%;
@@ -248,40 +311,6 @@ h4{
 }
 
 
-
-/* heading boxes */
-
-.header-buttons-container{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0.75rem;
-    margin: 5px;
-}
-.header-buttons-container button, .header-buttons-container form{
-    padding: 20px;
-    font-size: 16px;
-    border-radius: 0.4rem;
-    border: none;
-    outline: none;
-    background: var(--primary-color);
-    color: white;
-    text-align: center;
-}
-
-.header-buttons-container button:hover{
-    opacity: 0.7;
-    cursor: pointer;
-}
-
-#addJobBtn {
-    color: var(--primary-color);
-    background: white;
-    cursor: pointer;
-    border: 3px dotted var(--primary-color)
-}
-
-
-
 /* loader */
 .loader{
     position: fixed;
@@ -384,6 +413,22 @@ h4{
     margin-right: 10px; /* Add right margin */
     color: black;
 }
+.compose-email-container button{
+    margin: 10px;
+    border: none;
+    outline: none;
+    background: var(--primary-color);
+}
+#dashboard{
+    margin: 10px;
+    border: none;
+    outline: none;
+    background: var(--secondary-color);
+}
+.modal-header button{
+    background-color: red;
+}
+
 /* Override Quill Editor Styles */
 .ql-editor {
     color: black; /* Set text color to black */

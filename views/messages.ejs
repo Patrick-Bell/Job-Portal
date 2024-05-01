@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="css/messages.css">
+    <title>TechTroop | Messages</title>
+</head>
+<body>
+
+
+
+    <div class="filter-grid">
+    <div class="filter-container">
+        <a href="/admin"><i class="fa-solid fa-arrow-left-long"></i> Back to dashboard</a>
+    </div>
+    <div class="filter-container">
+        <a class="right-a" href="/report">Generate report <i class="fa-solid fa-arrow-right-long"></i></a>
+    </div>
+</div>
+
+
+
+
+<div class="filter-container">
+    <label for="filterId">Filter by ID:</label>
+    <input type="text" id="filterId" placeholder="Enter ID...">
+    <br><br>
+    <label for="filterName">Filter by Name:</label>
+    <input type="text" id="filterName" placeholder="Enter name...">
+    <br><br>
+    <label for="filterEmail">Filter by Email:</label>
+    <input type="text" id="filterEmail" placeholder="Enter email...">
+    <br><br>
+    <label for="filterResponded">Filter by Responded:</label>
+    <select id="filterResponded">
+        <option value="all">All</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+    </select>
+    <br><br>
+    <button onclick="applyFilters()">Apply Filters</button>
+    <button onclick="resetFilters()">Reset Filters</button>
+
+    <p>*** To save jobs as responded to, please visit the <a href="/admin">dashboard</a> and click <i class="fas fa-check-circle"></i> on the messages table. It will remove it from the table but it will be saved here.</p>
+</div>
+
+<div class="filter-container">
+    <p id="total-messages"></p>
+</div>
+
+    <!-- Message List -->
+    <div id="messageList"></div>
+
+    <!-- JavaScript -->
+    <script src="messages.js"></script>
+</body>
+</html>

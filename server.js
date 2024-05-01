@@ -83,9 +83,17 @@ app.get('/', (req, res) => {
     res.render('home.ejs'); // Render the home page
 });
 
-app.get('/admin', checkAuthenticated, (req, res) => {
+app.get('/admin', (req, res) => {
     res.render('admin.ejs'); // Render the admin dashboard if user is authenticated
 });
+
+app.get('/messages', (req, res) => {
+    res.render('messages.ejs')
+})
+
+app.get('/report', (req, res) => {
+    res.render('report.ejs')
+})
 
 
 // Define a route to serve the application form page

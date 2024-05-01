@@ -960,6 +960,57 @@ backToDash.addEventListener('click', () => {
     emailPage.style.display = 'none'
 })
 
+const fetchMenuMessageNum = async () => {
+    try{
+        const response = await axios.get('/api/messages')
+        const messages = response.data
+
+        const numOfMessage = document.querySelector('.menu-message-num')
+        const messageNum = messages.length
+
+        numOfMessage.textContent = messageNum
+        console.log(numOfMessage)
+    }catch(error){
+        console.log(error)
+    }
+}
+
+fetchMenuMessageNum()
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    const profilePicture = document.querySelector('.profile');
+    const dropdownMenu = document.querySelector('.dropdown-menu');
+
+    let menuTimeout; // Variable to track menu hover timeout
+
+    // Show dropdown menu on hover
+    profilePicture.addEventListener('mouseenter', function() {
+        clearTimeout(menuTimeout); // Clear any existing timeout
+        dropdownMenu.style.display = 'block';
+    });
+
+    // Hide dropdown menu on mouse leave (with delay)
+    profilePicture.addEventListener('mouseleave', function() {
+        // Set a timeout to hide the menu after a short delay (e.g., 300ms)
+        menuTimeout = setTimeout(function() {
+            dropdownMenu.style.display = 'none';
+        }, 300);
+    });
+
+    // Keep dropdown menu open when hovering over the menu itself
+    dropdownMenu.addEventListener('mouseenter', function() {
+        clearTimeout(menuTimeout); // Clear the timeout to keep the menu open
+    });
+
+    // Hide dropdown menu when mouse leaves the menu
+    dropdownMenu.addEventListener('mouseleave', function() {
+        // Set a timeout to hide the menu after a short delay (e.g., 300ms)
+        menuTimeout = setTimeout(function() {
+            dropdownMenu.style.display = 'none';
+        }, 300);
+    });
+});
 
 
 

@@ -140,4 +140,5 @@ hiddenLeft.forEach((el) => observer.observe(el))
 
 
 
+
 fetchAndDisplayJobsReportTable()

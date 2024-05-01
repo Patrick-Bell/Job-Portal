@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/tippy.js@6/animations/scale.css"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <title>Admin Page</title>
@@ -19,22 +20,29 @@
 
     <div class="dashboard-lg-container">
 
-
-
-
-    <div class="header-buttons-container">
-    <button id="addJobBtn">Add Job</button>
-    <button class="generate-report-btn">Generate Job Report</button>
-    <button id="email-page">Send Email</button>
-    <form action="/logout?_method=DELETE" method="POST">
-        <button type="submit">Log out</button>
-    </form>
-    </div>
-
-
-
-
-
+        <div class="navbar">
+            <img src="/images/footer-img.png" alt="">
+            <i class="fa-solid fa-user-plus profile"></i>
+        </div>
+        
+        
+            <ul class="dropdown-menu">
+                    <li class="dash-active"><i class="fa-solid fa-table-columns"></i> <a href="">Dashboard</a></li>
+                    <li><i class="fa-solid fa-gear"></i> <a href="#">Settings</a></li>
+                    <li><i class="fa-solid fa-note-sticky"></i> <a href="/report">Generate Report</a></li>
+                    <li><i class="fa-solid fa-message"></i> <a href="/messages">Messages</a>
+                        <p class="menu-message-num"></p>
+                    </li>
+                    <li id="email-page"><i class="fa-solid fa-envelope"></i> Send Email</li>
+                    <li id="addJobBtn"><i class="fa-solid fa-square-plus"></i> Add Job</li>
+                    <li><i class="fa-solid fa-bug"></i> <a href="#">Report bug</a></li>
+                    <form action="/logout?_method=DELETE" method="POST">
+                    <li>
+                        <i class="fa-solid fa-right-from-bracket"></i> <button type="submit">Log out</button>
+                    </li>
+                </form>
+                </ul>
+        
 
     <div class="toast-container delete-toast-container position-fixed bottom-0 end-0 p-3">
         <div id="deleteToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -406,10 +414,7 @@
 
 <div class="compose-email-container">
     <div class="header-buttons-container">
-        <button id="dashboard">Back To Dashboard</button>
-        <button class="generate-report-btn">Generate Job Report</button>
-        <button disabled id="email-page"></button>
-        <button id="log-out">Log Out</button>
+        <button id="dashboard"><i class="fa-solid fa-arrow-left-long"></i> Back To Dashboard</button>
         </div>
 
     <input type="text" placeholder="Compose Email to all Subscribed Users" id="compose-email" disabled>
