@@ -33,6 +33,7 @@ async function applyFilters() {
         const filterName = document.getElementById('filterName').value.trim().toLowerCase();
         const filterEmail = document.getElementById('filterEmail').value.trim().toLowerCase();
         const filterId = document.getElementById('filterId').value.trim().toLowerCase()
+        const filterMonth = document.getElementById('filterMonth').value; // Month filter
         const filterResponded = document.getElementById('filterResponded').value;
 
         // Log filter criteria for debugging
@@ -44,12 +45,13 @@ async function applyFilters() {
         const filteredMessages = data.filter(message => {
             const nameMatch = !filterName || message.name.toLowerCase().includes(filterName.toLowerCase());
             const emailMatch = !filterEmail || message.email.toLowerCase().includes(filterEmail.toLowerCase());
-            const idMatch = !filterId || message.id.toLowerCase().includes(filterId.toLowerCase())
+            const idMatch = !filterId || message.id.toLowerCase().includes(filterId.toLowerCase());
+            const monthMatch = !filterMonth || new Date(message.dateSent).getMonth() == filterMonth;
             const respondedMatch = (filterResponded === 'all') ||
                                    (filterResponded === 'yes' && message.responded === 'yes') ||
                                    (filterResponded === 'no' && message.responded === 'no');
           
-            return nameMatch && emailMatch && respondedMatch && idMatch;
+            return nameMatch && emailMatch && respondedMatch && idMatch && monthMatch;
           })
           
 
@@ -79,6 +81,7 @@ function resetFilters() {
     document.getElementById('filterEmail').value = '';
     document.getElementById('filterId').value = '';
     document.getElementById('filterResponded').value = 'all';
+    document.getElementById('filterMonth').value = ''
 
     fetchMessages(); // Re-fetch and render all messages
 }

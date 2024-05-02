@@ -278,17 +278,18 @@ function checkValidation() {
     const email = document.getElementById('contact-email').value;
     const message = document.getElementById('message').value;
 
-    // Regular expression for validating email format
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    // Regular expression for validating email format with spaces allowed
+    const emailRegex = /^\s*[^\s@]+@[^\s@]+\.[^\s@]+\s*$/;
 
-    if (name.length > 5 && message.length > 20 && emailRegex.test(email)) {
+    if (name.length > 5 && message.length > 20 && emailRegex.test(email.trim())) {
         submitMessageBtn.removeAttribute('disabled');
-        submitMessageBtn.style.cursor = 'not-allowed'
+        submitMessageBtn.style.cursor = 'pointer';
     } else {
         submitMessageBtn.setAttribute('disabled', 'disabled');
-        submitMessageBtn.style.cursor = 'pointer'
+        submitMessageBtn.style.cursor = 'not-allowed';
     }
 }
+
 
 // Add input event listeners to form fields
 document.getElementById('name').addEventListener('input', checkValidation);

@@ -24,7 +24,7 @@
 
 
 <div class="filter-container">
-    <label for="filterId">Filter by ID:</label>
+    <label for="filterId">Filter by Message ID:</label>
     <input type="text" id="filterId" placeholder="Enter ID...">
     <br><br>
     <label for="filterName">Filter by Name:</label>
@@ -32,6 +32,23 @@
     <br><br>
     <label for="filterEmail">Filter by Email:</label>
     <input type="text" id="filterEmail" placeholder="Enter email...">
+    <br><br>
+    <label for="filterMonth">Filter by Month:</label>
+    <select id="filterMonth">
+        <option value="">-- All Months (2024) --</option>
+        <option value="0">January</option>
+        <option value="1">February</option>
+        <option value="2">March</option>
+        <option value="3">April</option>
+        <option value="4">May</option>
+        <option value="5">June</option>
+        <option value="6">July</option>
+        <option value="7">August</option>
+        <option value="8">September</option>
+        <option value="9">October</option>
+        <option value="10">November</option>
+        <option value="11">December</option>
+    </select>
     <br><br>
     <label for="filterResponded">Filter by Responded:</label>
     <select id="filterResponded">
@@ -43,7 +60,7 @@
     <button onclick="applyFilters()">Apply Filters</button>
     <button onclick="resetFilters()">Reset Filters</button>
 
-    <p>*** To save jobs as responded to, please visit the <a href="/admin">dashboard</a> and click <i class="fas fa-check-circle"></i> on the messages table. It will remove it from the table but it will be saved here.</p>
+    <p>*** To save jobs as responded to, please visit the <a href="/admin"><u><i>dashboard</i></u></a> and click <i class="fas fa-check-circle"></i> on the messages table. It will remove it from the table but it will be saved here.</p>
 </div>
 
 <div class="filter-container">

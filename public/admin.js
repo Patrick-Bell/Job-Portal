@@ -173,7 +173,7 @@ const fetchAndDisplayMessageTable = async () => {
         updateStatistics()
 
         const messageInfo = document.querySelector('.message-job-page-info')
-        messageInfo.innerHTML = `Showing Messages <strong>${startIndex + 1}</strong> - <strong>${endIndex}</strong> | View all <a href="/messages">messages</a>`
+        messageInfo.innerHTML = `Showing Messages <strong>${startIndex + 1}</strong> - <strong>${endIndex}</strong>`
 
 
     } catch (error) {
@@ -588,6 +588,7 @@ const displayJob = (job) => {
 
     const cell5 = row.insertCell(4);
     const viewButton = document.createElement('div');
+    viewButton.style.cursor = 'pointer'
     viewButton.innerHTML = `View (<strong>${numOfApps}</strong>)`;
     viewButton.addEventListener('click', () => {
         toggleApplicantInfo(row, job.applicants);
@@ -908,6 +909,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Reset the Quill editor content after sending
             quill.root.innerHTML = ''; // Clear Quill editor content
+            subjectText.value = ''
 
             setTimeout(() => {
                 sendEmailBtn.innerHTML = 'Send Email';
@@ -916,7 +918,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 3000);
 
             toastBootstrap.show()
-
 
         } catch (error) {
             console.error('Error sending email:', error);
@@ -935,13 +936,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Debugging: Log to check if event listeners are being triggered
     console.log('Event listeners attached.');
 });
-
-
-function resetEmailHTML() {
-    const quill = new Quill('#editor');
-    quill.root.innerHTML = '';
-    subjectText.innerHTML = ''
-}
 
 
 const mainPage = document.querySelector('.dashboard-lg-container');
