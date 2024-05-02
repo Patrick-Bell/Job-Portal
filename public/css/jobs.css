@@ -346,7 +346,6 @@ footer{
 }
 
 
-
 @media screen and (max-width: 1170px) {
     .jobs-container{
         grid-template-columns: repeat(2, 1fr);

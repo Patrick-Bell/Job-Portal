@@ -266,7 +266,7 @@ ul{
     background: transparent;
     padding: 10px;
     color: white;
-    margin-top: 10px;
+    margin: 10px;
     border-radius: 0.4rem;
     width: 100%;
 }
@@ -470,6 +470,15 @@ button{
     margin: 5px auto 5px auto;
     resize: none;
     border-radius: 0.4rem;
+    position: relative;
+}
+.fa-triangle-exclamation{
+    color: red;
+    margin: 5px 50px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .send-message-btn{
     outline: none;
@@ -740,11 +749,13 @@ footer{
     padding: 8px;
     border: none;
     outline: none;
-    background: var(--primary-color);
+    background: red;
     color: white;
     cursor: pointer;
     border-radius: 0.4rem;
+    cursor: not-allowed;
 }
+
 
 
 
@@ -920,6 +931,18 @@ option{
     background: red;
   }
 
+
+  @keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-15px); }
+    50% { transform: translateX(15px); }
+    75% { transform: translateX(-15px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
 
 
 /* responsiveness queries*/

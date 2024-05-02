@@ -98,3 +98,11 @@ tippy('#to-top', {
     allowHTML: true,
     placement: 'right-start',
 });
+
+tippy('#contact-info', {
+    content: "<strong>Name</strong> (must be 5 characters)<br><strong>Email</strong> (must be a valid email)<br><strong>Message</strong> (must be at least 20 characters)",
+    allowHTML: true,
+    theme: 'tomato',
+});
+
+

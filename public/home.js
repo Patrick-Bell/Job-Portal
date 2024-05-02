@@ -148,12 +148,56 @@ closeReferralBtn.addEventListener("click", () => {
 })
 
 
-submitReferral.addEventListener("click", async () => { // Add async keyword here
-    const name = document.getElementById('user-name').value
-    const email = document.getElementById('user-email').value
-    const referralName = document.getElementById('referral-name').value
-    const referralEmail = document.getElementById('referral-email').value
-    const referralNumber = document.getElementById('referral-number').value
+submitReferral.addEventListener("click", async () => {
+    const name = document.getElementById('user-name').value.trim();
+    const email = document.getElementById('user-email').value.trim();
+    const referralName = document.getElementById('referral-name').value.trim();
+    const referralEmail = document.getElementById('referral-email').value.trim();
+    const referralNumber = document.getElementById('referral-number').value.trim();
+
+    // Validate form fields
+    if (name.length < 1 || email.length < 1 || referralName.length < 1 || referralEmail.length < 1 || referralNumber.length < 1) {
+        alert('Please fill out all required fields.');
+
+        // Add the 'shake' class to trigger the animation
+        submitReferral.classList.add('shake');
+
+        // Remove the 'shake' class after a delay to reset the animation
+        setTimeout(() => {
+            submitReferral.classList.remove('shake');
+        }, 500); // Adjust the delay (in milliseconds) as needed
+
+        return; // Exit function if any field is empty
+    }
+
+    // Additional validation for email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email) || !emailRegex.test(referralEmail)) {
+        alert('Please enter a valid email address.');
+
+        // Add the 'shake' class to trigger the animation
+        submitReferral.classList.add('shake');
+
+        // Remove the 'shake' class after a delay to reset the animation
+        setTimeout(() => {
+            submitReferral.classList.remove('shake');
+        }, 500); // Adjust the delay (in milliseconds) as needed
+
+        return; // Exit function if email format is invalid
+    }
+
+    const phoneRegex = /^(?:(?:\+|00)44|0)7\d{9}$/;
+    if (!phoneRegex.test(referralNumber)) {
+        alert('Plese enter a valid phone number');
+        submitReferral.classList.add('shake');
+
+        setTimeout(() => {
+            submitReferral.classList.remove('shake')
+        }, 500);
+
+        return;
+    }
+
 
     const referral = {
         id: generateRandomId(),
@@ -161,47 +205,71 @@ submitReferral.addEventListener("click", async () => { // Add async keyword here
         userEmail: email,
         referralName: referralName,
         referralEmail: referralEmail,
-        referralNumber: referralNumber,
+        referralNumber: referralNumber
     };
 
     try {
         const res = await axios.post('/api/referral', referral); // Await the axios POST request
         if (res.status === 200) {
-            console.log('Referral successfully submitted', referral);
-            console.log('sent', res.data);
-            resetForm()
+            console.log('Referral successfully submitted:', referral);
+            console.log('Response:', res.data);
+            resetForm();
         } else {
-            console.error(error);
+            console.error('Failed to submit referral. Status:', res.status);
         }
     } catch (error) {
-        console.log(error);
+        console.error('Error submitting referral:', error);
     }
 });
 
 function resetForm() {
-    const referTtext1 = document.getElementById('refer-text-1')
-    const referTtext2 = document.getElementById('refer-text-2')
+    // Reset form fields
+    document.getElementById('user-name').value = '';
+    document.getElementById('user-email').value = '';
+    document.getElementById('referral-name').value = '';
+    document.getElementById('referral-email').value = '';
+    document.getElementById('referral-number').value = '';
 
-    document.getElementById('user-name').value = ''
-    document.getElementById('user-email').value = ''
-    document.getElementById('referral-name').value = ''
-    document.getElementById('referral-email').value = ''
-    document.getElementById('referral-number').value = ''
+    // Display success message
+    const referText1 = document.getElementById('refer-text-1');
+    const referText2 = document.getElementById('refer-text-2');
+    referText1.textContent = "Thank you for your referral!";
+    referText2.textContent = "We will be in touch if your referral is a successful placement. Please keep an eye on the email you provided.";
 
-    referralApplicationForm.style.display = "none"
-
-    referTtext1.innerHTML = "Thank you for your referral"
-    referTtext2.innerHTML = "We will be in touch if your referral is a successul placement! Please keep an eye on the email you have provided."
-
+    // Reset message after a delay
     setTimeout(() => {
-        referTtext1.innerHTML = 'REFER A FRIEND TO US'
-        referTtext2.innerHTML = 'Every month, we rewards many people for recommending a friend to us. Refer a friend today, and if we place them, you can earn up to £1,000'
+        referText1.textContent = 'REFER A FRIEND TO US';
+        referText2.textContent = 'Every month, we reward many people for recommending a friend to us. Refer a friend today, and if we place them, you can earn up to £1,000';
     }, 5000);
 
-    referralApplicationForm.scrollIntoView({ behavior: 'smooth' });
+    // Scroll to the form section
+    const referralApplicationForm = document.querySelector('.refer-application');
+    referralApplicationForm.style.display = "none"; // Hide the form section
 
-    setUpMenuListeners()
+
+    const referralSection = document.getElementById('referral-scroll')
+    referralSection.scrollIntoView({ behavior: 'smooth' });
+
+    // Set up menu listeners (if needed)
+    setUpMenuListeners();
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 const submitMessageBtn = document.querySelector('.send-message-btn');
 
@@ -210,20 +278,30 @@ function checkValidation() {
     const email = document.getElementById('contact-email').value;
     const message = document.getElementById('message').value;
 
-    if (name.length > 1 && message.length > 10 && email.length > 5) {
+    // Regular expression for validating email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (name.length > 5 && message.length > 20 && emailRegex.test(email)) {
         submitMessageBtn.removeAttribute('disabled');
+        submitMessageBtn.style.cursor = 'not-allowed'
     } else {
         submitMessageBtn.setAttribute('disabled', 'disabled');
+        submitMessageBtn.style.cursor = 'pointer'
     }
 }
 
+// Add input event listeners to form fields
 document.getElementById('name').addEventListener('input', checkValidation);
-document.getElementById('email').addEventListener('input', checkValidation);
+document.getElementById('contact-email').addEventListener('input', checkValidation);
 document.getElementById('message').addEventListener('input', checkValidation);
 
+// Initial validation check on page load
 checkValidation();
 
+
 submitMessageBtn.addEventListener("click", async () => {
+    
+    console.log('clicking')
     const name = document.getElementById('name').value;
     const email = document.getElementById('contact-email').value;
     const message = document.getElementById('message').value;
@@ -277,11 +355,54 @@ submitMessageBtn.addEventListener("click", async () => {
 });
 
 
+
 function removeContactForm() {
     document.getElementById('name').value = '';
     document.getElementById('contact-email').value = '';
     document.getElementById('message').value = '';
 }
+
+
+
+
+
+
+
+
+
+
+
+/// Get DOM elements
+const eventEmail = document.getElementById('event-email');
+const eventBtn = document.getElementById('event-btn');
+const emailValidationText = document.querySelector('.email-valid');
+
+// Function to check email validation
+function checkEmailValidation() {
+    const emailInput = eventEmail.value.trim(); // Get the trimmed value of the email input
+
+    // Regular expression for validating email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const correctEmail = emailRegex.test(emailInput);
+
+    console.log(correctEmail);
+
+    if (correctEmail) {
+        // Enable the button if the email is valid
+        eventBtn.removeAttribute('disabled');
+        eventBtn.style.background = '#262F4C'
+    } else {
+        // Disable the button and show validation message if the email is invalid
+        eventBtn.setAttribute('disabled', 'disabled');
+        eventBtn.style.background = 'red'
+
+    }
+}
+
+// Add input event listener to the email input field
+eventEmail.addEventListener('input', checkEmailValidation);
+
+
 
 
 const registerEventInterestBtn = document.getElementById('event-btn')
@@ -300,13 +421,15 @@ registerEventInterestBtn.addEventListener('click', async () => {
             console.log('interest registered', event)
             console.log('sent', res.data)
             resetEventForm()
+            checkEmailValidation()
 
             registerEventInterestBtn.innerHTML = 'Saving to the DB.'
             registerEventInterestBtn.style.background = 'green'
 
+
             setTimeout(() => {
                 registerEventInterestBtn.innerHTML = 'Register interest'
-                registerEventInterestBtn.style.background = '#262F4C'
+                registerEventInterestBtn.style.background = 'red'
             }, 3000);
 
         } else {
