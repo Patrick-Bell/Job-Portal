@@ -145,3 +145,16 @@ h2 {
     position: absolute;
     right: 40px;
 }
+
+
+@media screen and (max-width: 500px) {
+    .filter-grid{
+        display: block;
+    }
+    #second{
+        display: none;
+    }
+    button{
+        margin: 5px 0 5px 0;
+    }
+}

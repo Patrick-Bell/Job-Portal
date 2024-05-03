@@ -88,7 +88,7 @@ searchSalaryBtn.addEventListener('click', () => {
 
 
 tippy('#salary-i-info', {
-    content: "Salary information may not be 100% accurate but is a solid foundation for tech salaries in the UK. All positions are based on <strong>Senior</strong> positions unless stated in the job title",
+    content: "Salary information retrieved from uk-techsalaries.com. Salaries are based of <strong>senior</strong> positions.",
     allowHTML: true,
     theme: 'tomato',
 });
@@ -104,5 +104,15 @@ tippy('#contact-info', {
     allowHTML: true,
     theme: 'tomato',
 });
+
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password')
+const clickForSampleAccount = document.getElementById('sample-acc')
+
+
+clickForSampleAccount.addEventListener('click', () => {
+    emailInput.value = 'admin123@gmail.com';
+    passwordInput.value = 'Admin123!';
+})
 
 
