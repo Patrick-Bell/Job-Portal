@@ -186,7 +186,7 @@ submitReferral.addEventListener("click", async () => {
         return; // Exit function if email format is invalid
     }
 
-    const phoneRegex = /^(?:(?:\+|00)44|0)7\d{9}$/;
+    const phoneRegex = /^0\d{10}$/;
     if (!phoneRegex.test(referralNumber)) {
         alert('Plese enter a valid phone number');
         submitReferral.classList.add('shake');
@@ -281,7 +281,7 @@ function checkValidation() {
     // Regular expression for validating email format with spaces allowed
     const emailRegex = /^\s*[^\s@]+@[^\s@]+\.[^\s@]+\s*$/;
 
-    if (name.length > 5 && message.length > 20 && emailRegex.test(email.trim())) {
+    if (name.length > 1 && message.length > 20 && emailRegex.test(email.trim())) {
         submitMessageBtn.removeAttribute('disabled');
         submitMessageBtn.style.cursor = 'pointer';
     } else {

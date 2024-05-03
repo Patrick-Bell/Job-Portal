@@ -38,6 +38,7 @@ img{
     color: white;
     padding: 10px;
     border-radius: 0.4rem;
+    cursor: pointer;
 }
 
 .dropdown-menu {

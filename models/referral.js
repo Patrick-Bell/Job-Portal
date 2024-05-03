@@ -7,7 +7,7 @@ const referralSchema = new mongoose.Schema({
     referralName: String,
     referralEmail: String,
     referralNumber: {
-        type: Number, // Use lowercase 'type' here
+        type: String, // Use lowercase 'type' here
     },
     datePosted: {
         type: Date, // Define the type for datePosted field

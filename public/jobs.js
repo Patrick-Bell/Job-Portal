@@ -128,6 +128,7 @@ async function renderAllJobs(jobs) {
                 }
                 queryParams.append('jobId', job.id);
                 const queryString = queryParams.toString();
+                console.log(queryString)
                 window.location.href = `/apply?${queryString}`;
             });
         });
